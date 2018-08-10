@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.murimoa.mapper.TimeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,5 +34,13 @@ public class DBTest {
     @Test
     public void test2() {
         System.out.println(factory);
+    }
+    
+    @Inject
+    TimeMapper timeMapper;
+    
+    @Test
+    public void test3() {
+        System.out.println(timeMapper.getTime());
     }
 }
