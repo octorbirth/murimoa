@@ -31,50 +31,12 @@
 
 
 	<section class="content">
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h5>그룹명1</h5>
-              <p>그룹 리더</p>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h5>그룹명2</h5>
-              <p>그룹 리더</p>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>        
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h5>그룹명3</h5>
-              <p>그룹 리더</p>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-		<div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h5>그룹명4</h5>
-              <p>그룹 리더</p>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-      </div>
+      <div class="row" id="myGroupList">
       
-      </section>
+      </div>
+     
+      
+     </section>
 
 
   </div>
@@ -96,8 +58,41 @@
 <script src="/resources/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="/resources/sweetalert2/dist/sweetalert2.min.js"></script>
+<script type="text/javascript" src="/resources/js/handlebars.min.js"></script>
 
+<script id="myGroupTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+	<div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h5>{{groupName}}</h5>
+              <p>현승우 <label><small>(Leader)</small></label></p>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+    {{/each}}
+</script>
 <script>
+var myGroupSource = $('#myGroupTemplate').html();
+var myGroupTemplate = Handlebars.compile(myGroupSource);
+
+function getMyGroup(){
+    var data = [];
+    
+    $.getJSON("/group/mygroup/", function(arr){
+          for(var i=0; i< arr.length; i++){
+            data.push({
+            	groupName : arr[i].name,
+            })  
+          }
+          
+          $("#myGroupList").append(myGroupTemplate(data));
+   });
+  }
+
+getMyGroup();
+
 var actionForm = $("#actionForm");
 $("#registerBtn").on("click",function(e){
     e.preventDefault();

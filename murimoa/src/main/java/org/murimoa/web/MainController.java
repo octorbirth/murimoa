@@ -13,6 +13,5 @@ public class MainController {
 	
     @GetMapping("/main")
     public void mainGet() {
-        log.info("Get 방식으로 접근!!!");
     }
 }

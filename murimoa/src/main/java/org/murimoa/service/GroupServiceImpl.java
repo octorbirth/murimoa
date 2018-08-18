@@ -1,5 +1,7 @@
 package org.murimoa.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.murimoa.dto.GroupDTO;
@@ -18,6 +20,11 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public void register(GroupDTO dto) {
 		 mapper.insert(dto);
+	}
+
+	@Override
+	public List<GroupDTO> getMyGroup() {
+		return mapper.getMyGroup();
 	}
 
 }
