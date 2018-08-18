@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import org.murimoa.dto.BoardDTO;
+import org.murimoa.dto.Criteria;
 import org.murimoa.dto.GroupDTO;
 import org.springframework.stereotype.Service;
 import org.murimoa.mapper.BoardMapper;
@@ -24,8 +25,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardDTO> list(GroupDTO dto) {
-		return BoardMapper.getList(dto);
+	public List<BoardDTO> list(Criteria cri) {
+		cri.setTotal(BoardMapper.getTotal(cri));
+		return BoardMapper.getList(cri);
 	}
 
 	@Override

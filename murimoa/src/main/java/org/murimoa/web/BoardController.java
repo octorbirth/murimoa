@@ -3,6 +3,7 @@ package org.murimoa.web;
 import javax.inject.Inject;
 
 import org.murimoa.dto.BoardDTO;
+import org.murimoa.dto.Criteria;
 import org.murimoa.dto.GroupDTO;
 import org.murimoa.service.BoardService;
 import org.murimoa.service.GroupService;
@@ -28,9 +29,9 @@ public class BoardController {
     private BoardService boardService;
 	
     @GetMapping("/list")
-    public void listGet(Model model, GroupDTO dto) {
+    public void listGet(Model model, GroupDTO dto, @ModelAttribute("cri") Criteria cri) {
     	model.addAttribute("groupInfo", groupService.getinfo(dto));
-    	model.addAttribute("boardList", boardService.list(dto));
+    	model.addAttribute("boardList", boardService.list(cri));
     }
     
     @GetMapping("/register")

@@ -118,6 +118,7 @@
 <script src="/resources/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="/resources/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="/resources/js/pageNaviMaker.js"></script>   
 <script>
 	var actionForm = $("#actionForm");
     $("#boardRegistBtn").on("click",function(e){
@@ -136,6 +137,25 @@
     		  timer: 1200
     	})
     }
+    
+    var pageStr = makePage({
+        pageSize : 10, // 한 페이지 당 보여지는 데이터의 양
+        liCount : 10, // Page Navigation에 표시는 li의 개수(페이지 개수)
+        total : ${cri.total}, // 현재 데이터의 총 개수
+        current : ${cri.page} // 현재 페이지
+    });
+    
+    $(".pagination").html(pageStr);
+
+    $(".pagination").on("click", "li", function(e){
+        e.preventDefault();
+        var pageNum = $(this).attr('data-page');
+        
+        // [Prev], [Next]는 disabled되어 있을 뿐 이벤트위임으로 이벤트가 적용되므로 이를 처리하기 위함.
+        if(pageNum !== undefined) {
+            self.location="/board/list?page="+pageNum+"&gno="+${groupInfo.gno};
+        }
+    });
 </script>
 </body>
 </html>

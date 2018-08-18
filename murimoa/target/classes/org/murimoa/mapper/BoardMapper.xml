@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.murimoa.mapper.BoardMapper">
+    <select id="getList" resultType="BoardDTO">
+    	select * from tbl_board where gno = #{gno} order by bno desc, regdate desc  limit #{skip},10
+    </select>    
+</mapper>
