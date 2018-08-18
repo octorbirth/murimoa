@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/resources/css/AdminLTE.css">
   <link rel="stylesheet" href="/resources/css/_all-skins.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+  <link rel="stylesheet" href="/resources/sweetalert2/dist/sweetalert2.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -93,6 +93,10 @@
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
 
+<script src="/resources/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="/resources/sweetalert2/dist/sweetalert2.min.js"></script>
+
 <script>
 var actionForm = $("#actionForm");
 $("#registerBtn").on("click",function(e){
@@ -103,7 +107,12 @@ $("#registerBtn").on("click",function(e){
 
 var msg = '${result}';
 if (msg === 'groupRegister') {
-	alert("그룹이 생성되었습니다.");
+	swal({
+		  type: 'success',
+		  title: '그룹이 생성되었습니다!',
+		  showConfirmButton: false,
+		  timer: 1200
+	})
 }
 </script>
 </body>
