@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/resources/css/AdminLTE.css">
   <link rel="stylesheet" href="/resources/css/_all-skins.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+  <link rel="stylesheet" href="/resources/sweetalert2/dist/sweetalert2.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -71,7 +71,7 @@
 				            <c:forEach var="item" items="${boardList}">
 				            <tr>
 				              <td>${item.bno}</td>
-				              <td><a href="#">${item.title}</a></td>
+				              <td><a href="/board/view?bno=${item.bno}&gno=${groupInfo.gno}">${item.title}</a></td>
 				              <td>${item.writer}</td>
 				              <td><fmt:formatDate value="${item.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
 				            </tr>
@@ -115,6 +115,9 @@
 
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
+<script src="/resources/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="/resources/sweetalert2/dist/sweetalert2.min.js"></script>
 <script>
 	var actionForm = $("#actionForm");
     $("#boardRegistBtn").on("click",function(e){
@@ -124,6 +127,15 @@
         actionForm.submit();
     });
 	
+    var msg = '${result}';
+    if (msg === 'delsuccess') {
+    	swal({
+    		  type: 'success',
+    		  title: '게시글 삭제 완료!',
+    		  showConfirmButton: false,
+    		  timer: 1200
+    	})
+    }
 </script>
 </body>
 </html>

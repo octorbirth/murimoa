@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.java.Log;
 
@@ -41,5 +42,18 @@ public class BoardController {
     public String registerPost(BoardDTO dto) {
 		boardService.register(dto);
 	    return "redirect:/board/list?gno=" + dto.getGno();
+    }
+	
+    @GetMapping("/view")
+    public void viewGet(Model model, BoardDTO dto) {
+        model.addAttribute("boardInfo", boardService.get(dto));
+        return;
+    }
+    
+    @PostMapping("/remove")
+    public String removePost(BoardDTO dto, RedirectAttributes rttr) {
+    	boardService.delete(dto);
+        rttr.addFlashAttribute("result", "delsuccess");
+        return "redirect:/board/list?gno=" + dto.getGno();
     }
 }

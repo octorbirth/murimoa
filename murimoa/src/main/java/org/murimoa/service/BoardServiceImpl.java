@@ -27,4 +27,15 @@ public class BoardServiceImpl implements BoardService{
 		return BoardMapper.getList(dto);
 	}
 
+	@Override
+	public BoardDTO get(BoardDTO dto) {
+		 return BoardMapper.getBoard(dto);
+	}
+	
+    @Override
+    public void delete(BoardDTO dto) {
+    	BoardMapper.remove(dto);
+        return;
+    }
+
 }

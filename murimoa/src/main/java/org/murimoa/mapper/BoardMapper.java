@@ -2,6 +2,7 @@ package org.murimoa.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.murimoa.dto.BoardDTO;
@@ -13,5 +14,11 @@ public interface BoardMapper {
     public void insert(BoardDTO dto);
     
     @Select("select * from tbl_board where gno = #{gno}")
-    List<BoardDTO> getList(GroupDTO dto);
+    public List<BoardDTO> getList(GroupDTO dto);
+    
+    @Select("select * from tbl_board where bno = #{bno} and gno = #{gno}")
+    public BoardDTO getBoard(BoardDTO dto);
+    
+    @Delete("delete from tbl_board where bno = #{bno}")
+    public void remove(BoardDTO dto);
 }

@@ -10,5 +10,9 @@ public interface BoardService {
 	public void register(BoardDTO dto);
 
 	public List<BoardDTO> list(GroupDTO dto);
+	
+	public BoardDTO get(BoardDTO dto);
+	
+    public void delete(BoardDTO dto);
 
 }
