@@ -8,4 +8,6 @@ public interface GroupService {
 	public void register(GroupDTO dto);
 
 	public List<GroupDTO> getMyGroup();
+
+	public GroupDTO getinfo(GroupDTO dto);
 }

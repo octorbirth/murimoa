@@ -27,4 +27,11 @@ public class GroupServiceImpl implements GroupService{
 		return mapper.getMyGroup();
 	}
 
+	@Override
+	public GroupDTO getinfo(GroupDTO dto) {
+		GroupDTO info = mapper.getGroupInfo(dto);
+		info.setMemberCount(mapper.getGroupMemberCount(dto));
+		return info;
+	}
+
 }
