@@ -80,7 +80,7 @@
 			        
 	                <div class="box-footer clearfix">
 	
-			          <button type="button" class="btn btn-default pull-right">
+			          <button id="boardRegistBtn" type="button" class="btn btn-default pull-right">
 			          		<i class="fa fa-plus"></i> Add item
 			          </button>
 			          
@@ -101,7 +101,9 @@
    	</section>
   </div>
 </div>
-
+<form id='actionForm' method="get">
+    
+</form>
 
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/jquery-ui.js"></script>
@@ -112,6 +114,15 @@
 
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
-
+<script>
+	var actionForm = $("#actionForm");
+    $("#boardRegistBtn").on("click",function(e){
+        e.preventDefault();
+        actionForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
+        actionForm.attr("method", "get").attr("action","/board/register");
+        actionForm.submit();
+    });
+	
+</script>
 </body>
 </html>
