@@ -68,7 +68,7 @@
               <h5>{{groupName}}</h5>
               <p>현승우 <label><small>(Leader)</small></label></p>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a data-gno="{{gno}}" href="#" class="group-board small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
     {{/each}}
@@ -84,6 +84,7 @@ function getMyGroup(){
           for(var i=0; i< arr.length; i++){
             data.push({
             	groupName : arr[i].name,
+            	gno : arr[i].gno,
             })  
           }
           
@@ -97,6 +98,14 @@ var actionForm = $("#actionForm");
 $("#registerBtn").on("click",function(e){
     e.preventDefault();
     actionForm.attr("method", "get").attr("action","/group/register");
+    actionForm.submit();
+});
+
+$("#myGroupList").on("click", ".group-board", function(e){
+	e.preventDefault();
+	var gno = $(this).attr("data-gno");
+	actionForm.append("<input type='hidden' name='gno' value='" + gno + "'>");
+    actionForm.attr("method", "get").attr("action","/board/list");
     actionForm.submit();
 });
 
