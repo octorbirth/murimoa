@@ -35,7 +35,7 @@ public class BoardController {
     }
     
     @GetMapping("/register")
-    public void registerGet(@ModelAttribute("groupInfo") GroupDTO dto) {
+    public void registerGet(@ModelAttribute("groupInfo") GroupDTO dto, @ModelAttribute("cri") Criteria cri) {
     	
     }
     
@@ -46,7 +46,7 @@ public class BoardController {
     }
 	
     @GetMapping("/view")
-    public void viewGet(Model model, BoardDTO dto) {
+    public void viewGet(Model model, BoardDTO dto, @ModelAttribute("cri") Criteria cri) {
         model.addAttribute("boardInfo", boardService.get(dto));
         return;
     }
@@ -59,17 +59,17 @@ public class BoardController {
     }
     
     @GetMapping("/modify")
-    public void modifyGet(Model model, BoardDTO dto) {
+    public void modifyGet(Model model, BoardDTO dto, @ModelAttribute("cri") Criteria cri) {
     	model.addAttribute("boardInfo", boardService.get(dto));
         return;
     }
     
     @PostMapping("/modify")
-    public String modify(BoardDTO dto, RedirectAttributes rttr) {
+    public String modify(BoardDTO dto, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
         rttr.addAttribute("bno", dto.getBno());
         rttr.addAttribute("gno", dto.getGno());
         rttr.addFlashAttribute("result", "modsuccess");
         boardService.modify(dto);
-        return "redirect:/board/view";
+        return "redirect:/board/view" + cri.getURI();
     }
 }

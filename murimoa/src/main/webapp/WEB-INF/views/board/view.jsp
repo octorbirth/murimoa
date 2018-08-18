@@ -83,6 +83,7 @@
     $("#cancelBtn").click(function(e) {
       e.preventDefault();
       actionForm.append("<input type='hidden' name='gno' value='${boardInfo.gno}'>");
+      actionForm.append("<input type='hidden' name='page' value='${cri.page}'>");
       actionForm.attr("method", "get").attr("action","/board/list").submit();
     });
     
@@ -97,6 +98,7 @@
         e.preventDefault();
         actionForm.append("<input type='hidden' name='gno' value='${boardInfo.gno}'>");
         actionForm.append("<input type='hidden' name='bno' value='${boardInfo.bno}'>");
+        actionForm.append("<input type='hidden' name='page' value='${cri.page}'>");
         actionForm.attr("method", "get").attr("action","/board/modify").submit();
     });
     

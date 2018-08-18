@@ -71,7 +71,7 @@
 				            <c:forEach var="item" items="${boardList}">
 				            <tr>
 				              <td>${item.bno}</td>
-				              <td><a href="/board/view?bno=${item.bno}&gno=${groupInfo.gno}">${item.title}</a></td>
+				              <td><a href="/board/view?bno=${item.bno}&gno=${groupInfo.gno}&page=${cri.page}">${item.title}</a></td>
 				              <td>${item.writer}</td>
 				              <td><fmt:formatDate value="${item.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
 				            </tr>
@@ -124,6 +124,7 @@
     $("#boardRegistBtn").on("click",function(e){
         e.preventDefault();
         actionForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
+        actionForm.append("<input type='hidden' name='page' value='${cri.page}'>");
         actionForm.attr("method", "get").attr("action","/board/register");
         actionForm.submit();
     });

@@ -44,6 +44,7 @@
           </div>
           <input type='hidden' name='bno' value='${boardInfo.bno}'>
           <input type='hidden' name='gno' value='${boardInfo.gno}'>
+          <input type='hidden' name='page' value='${cri.page}'>
         </form>
         
         
@@ -79,6 +80,7 @@
         e.preventDefault();
         actionForm.append("<input type='hidden' name='bno' value='${boardInfo.bno}'>");
         actionForm.append("<input type='hidden' name='gno' value='${boardInfo.gno}'>");
+        actionForm.append("<input type='hidden' name='page' value='${cri.page}'>");
         actionForm.attr("method", "get").attr("action","/board/view").submit();
     });
       

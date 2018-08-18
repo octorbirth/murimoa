@@ -91,6 +91,7 @@
     $("#cancelBtn").on("click",function(e){
         e.preventDefault();
         actionForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
+        actionForm.append("<input type='hidden' name='page' value='${cri.page}'>");
         actionForm.attr("method", "get").attr("action","/board/list");
         actionForm.submit();
     });
