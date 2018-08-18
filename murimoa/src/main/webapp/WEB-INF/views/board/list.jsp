@@ -68,13 +68,14 @@
 				              <th>작성자</th>
 				              <th>작성일</th>
 				            </tr>
-				            
+				            <c:forEach var="item" items="${boardList}">
 				            <tr>
-				              <td>1</td>
-				              <td>제목</td>
-				              <td>작성자</td>
-				              <td>작성자</td>
+				              <td>${item.bno}</td>
+				              <td><a href="#">${item.title}</a></td>
+				              <td>${item.writer}</td>
+				              <td><fmt:formatDate value="${item.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
 				            </tr>
+				            </c:forEach>
 			          	</table>
 			        </div>
 			        

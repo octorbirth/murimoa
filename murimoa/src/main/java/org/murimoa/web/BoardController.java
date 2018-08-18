@@ -29,6 +29,7 @@ public class BoardController {
     @GetMapping("/list")
     public void listGet(Model model, GroupDTO dto) {
     	model.addAttribute("groupInfo", groupService.getinfo(dto));
+    	model.addAttribute("boardList", boardService.list(dto));
     }
     
     @GetMapping("/register")
