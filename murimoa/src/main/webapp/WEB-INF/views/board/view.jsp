@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/resources/css/AdminLTE.css">
   <link rel="stylesheet" href="/resources/css/_all-skins.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+  <link rel="stylesheet" href="/resources/sweetalert2/dist/sweetalert2.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -73,7 +73,9 @@
 
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
-
+<script src="/resources/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="/resources/sweetalert2/dist/sweetalert2.min.js"></script>
 
 <script>
     var actionForm = $("#actionForm");
@@ -91,7 +93,22 @@
         actionForm.attr("method", "post").attr("action","/board/remove").submit();
     });
     
-
+    $("#modifyBtn").click(function(e) {
+        e.preventDefault();
+        actionForm.append("<input type='hidden' name='gno' value='${boardInfo.gno}'>");
+        actionForm.append("<input type='hidden' name='bno' value='${boardInfo.bno}'>");
+        actionForm.attr("method", "get").attr("action","/board/modify").submit();
+    });
+    
+    var msg = '${result}';
+    if (msg === 'modsuccess') {
+    	swal({
+    		  type: 'success',
+    		  title: '게시글 수정 완료!',
+    		  showConfirmButton: false,
+    		  timer: 1200
+    	})
+    }
     
 </script>
 

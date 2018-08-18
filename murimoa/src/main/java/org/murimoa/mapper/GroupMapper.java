@@ -19,4 +19,5 @@ public interface GroupMapper {
     
     @Select("select count(*) memberCount from tbl_group_member where gno = #{gno}")
     public Integer getGroupMemberCount(GroupDTO dto);
+    
 }

@@ -1,5 +1,6 @@
 package org.murimoa.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,6 +36,13 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void delete(BoardDTO dto) {
     	BoardMapper.remove(dto);
+        return;
+    }
+    
+    @Override
+    public void modify(BoardDTO dto) {
+    	
+    	BoardMapper.update(dto);
         return;
     }
 

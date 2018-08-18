@@ -56,4 +56,19 @@ public class BoardController {
         rttr.addFlashAttribute("result", "delsuccess");
         return "redirect:/board/list?gno=" + dto.getGno();
     }
+    
+    @GetMapping("/modify")
+    public void modifyGet(Model model, BoardDTO dto) {
+    	model.addAttribute("boardInfo", boardService.get(dto));
+        return;
+    }
+    
+    @PostMapping("/modify")
+    public String modify(BoardDTO dto, RedirectAttributes rttr) {
+        rttr.addAttribute("bno", dto.getBno());
+        rttr.addAttribute("gno", dto.getGno());
+        rttr.addFlashAttribute("result", "modsuccess");
+        boardService.modify(dto);
+        return "redirect:/board/view";
+    }
 }

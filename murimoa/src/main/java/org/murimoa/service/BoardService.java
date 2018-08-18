@@ -14,5 +14,7 @@ public interface BoardService {
 	public BoardDTO get(BoardDTO dto);
 	
     public void delete(BoardDTO dto);
+    
+    public void modify(BoardDTO dto);
 
 }
