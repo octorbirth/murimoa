@@ -1,0 +1,35 @@
+package org.murimoa.web;
+
+import javax.inject.Inject;
+
+import org.murimoa.dto.GroupDTO;
+import org.murimoa.service.GroupService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import lombok.extern.java.Log;
+
+@Controller
+@RequestMapping("/group/*")
+@Log
+public class GroupController {
+	
+    @Inject
+    private GroupService service;
+	
+    @GetMapping("/register")
+    public void registerGet() {
+        
+    }
+    
+    @PostMapping("/register")
+    public String registerPost(GroupDTO dto, RedirectAttributes rttr) {
+        service.register(dto);
+        rttr.addFlashAttribute("result","groupRegister");
+        return "redirect:/murimoa/main";
+    }
+	
+}

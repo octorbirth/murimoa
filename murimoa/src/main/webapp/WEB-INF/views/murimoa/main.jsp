@@ -22,11 +22,66 @@
   <%@include file="/WEB-INF/views/include/aside.jsp" %>
   
   <div class="content-wrapper">
-    
+  	<section class="content-header">
+      <h1>내가 속한 그룹<small>My Group</small></h1>
+      <ol class="breadcrumb">
+        <li class="active"><button id="registerBtn" type="button" class="btn btn-primary btn-sm btn-flat">그룹 생성</button></li>
+      </ol>
+    </section>
+
+
+	<section class="content">
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h5>그룹명1</h5>
+              <p>그룹 리더</p>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h5>그룹명2</h5>
+              <p>그룹 리더</p>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h5>그룹명3</h5>
+              <p>그룹 리더</p>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+		<div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h5>그룹명4</h5>
+              <p>그룹 리더</p>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      </section>
+
 
   </div>
 </div>
-
+<form id='actionForm' method="get">
+    
+</form>
 
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/jquery-ui.js"></script>
@@ -37,5 +92,19 @@
 
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
+
+<script>
+var actionForm = $("#actionForm");
+$("#registerBtn").on("click",function(e){
+    e.preventDefault();
+    actionForm.attr("method", "get").attr("action","/group/register");
+    actionForm.submit();
+});
+
+var msg = '${result}';
+if (msg === 'groupRegister') {
+	alert("그룹이 생성되었습니다.");
+}
+</script>
 </body>
 </html>
