@@ -30,9 +30,7 @@ public class BoardServiceImpl implements BoardService{
 		BoardMapper.insert(dto);
         String[] ufiles = dto.getUfile();
         if(ufiles != null) {
-            Arrays.stream(ufiles).forEach((name)->{
-                attachMapper.insert(name);
-            });
+            attachMapper.insert(ufiles);
         }
 	}
 
