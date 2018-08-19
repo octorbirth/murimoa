@@ -54,6 +54,25 @@
             <button id="deleteBtn" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
             <button id="modifyBtn" type="button" class="btn btn-default"><i class="fa fa-pencil"></i> 수정</button>
           </div>
+          
+          <div class="box-footer">
+              <h3>댓글</h3>
+            <form class="form-horizontal">
+              <div class="form-group margin-bottom-none">
+                <div class="col-sm-10">
+                  <textarea id="reply" type="text" style="resize:none" class="form-control" placeholder="Enter contents"></textarea>
+                </div>
+                <div class="col-sm-2">
+                  <button id="replyBtn" style="font-size: 20px;line-height: 2;" type="submit" class="btn btn-danger pull-right btn-block btn-sm">완료</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+          
+          <div class="box-footer replyUL">
+          
+          </div>
       </div>
     </section>
   </div>
@@ -76,6 +95,31 @@
 <script src="/resources/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="/resources/sweetalert2/dist/sweetalert2.min.js"></script>
+<script type="text/javascript" src="/resources/js/handlebars.min.js"></script>
+
+<script id="replyTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+    <div class="post clearfix">
+        <div class="user-block">
+            <img class="img-circle img-bordered-sm" src="#" alt="User Image">
+            <span class="username">{{replyer}}</span>
+            <span class="description"><i class="fa fa-clock-o margin-r-4"></i> {{replyDate}}</span>
+        </div>
+        <p>{{reply}}</p>
+        <ul class="list-inline">
+            <li><a href="#" class="link-black text-sm"><i class="fa fa-trash margin-r-5"></i> 삭제</a></li>
+            <li><a href="#" class="link-black text-sm"><i class="fa fa-pencil margin-r-5"></i> 수정</a></li>
+        </ul>
+              
+        <div class="input-group">
+            <textarea type="text"  style="resize:none;" class="form-control" placeholder="Enter contents"></textarea>
+            <div class="input-group-btn">
+                <button type="button" style="font-size: 15px; line-height:40px;"class="btn btn-success">완료</button>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
 
 <script>
     var actionForm = $("#actionForm");
@@ -112,6 +156,43 @@
     	})
     }
     
+    var replySource = $('#replyTemplate').html();
+    var replyTemplate = Handlebars.compile(replySource);
+    
+    function getReply(){
+        var data = [];
+        $.getJSON("/reply/list/" + ${boardInfo.bno}, function(arr){
+              for(var i=0; i< arr.length; i++){
+                var time = new Date(arr[i].regdate);
+                var replyDate = (time.getFullYear()+"-"+(time.getMonth()+1)+"-"+ time.getDate());  
+                data.push({
+                    replyer : arr[i].replyer,
+                    replyDate : replyDate,
+                    reply : arr[i].reply
+                })  
+              }
+              
+              $(".replyUL").append(replyTemplate(data));
+       });
+      }
+    
+    getReply();
+    
+    $("#replyBtn").click(function(e){
+        e.preventDefault();
+        var data = {reply:$("#reply").val(), replyer: "Temp", bno: ${boardInfo.bno}};
+        $.ajax({
+            url:'/reply/new',
+            type:'POST',
+            contentType: "application/json; charset=utf-8",
+            data:JSON.stringify(data),
+            success: function(result){
+                $("#reply").val("");
+                $(".replyUL").html("");
+                getReply();
+            }
+        })
+    });
 </script>
 
 
