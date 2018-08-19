@@ -22,4 +22,9 @@ public class ReplyServiceImpl implements ReplyService{
     public List<ReplyDTO> getListReply(ReplyDTO dto) {        
         return mapper.listReply(dto);
     }
+    
+    @Override
+    public void remove(Integer rno) {
+        mapper.delete(rno);
+    }
 }

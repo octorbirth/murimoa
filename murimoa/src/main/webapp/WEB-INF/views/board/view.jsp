@@ -99,7 +99,7 @@
 
 <script id="replyTemplate" type="text/x-handlebars-template">
     {{#each .}}
-    <div class="post clearfix">
+    <div data-rno={{rno}} class="reply-box post clearfix">
         <div class="user-block">
             <img class="img-circle img-bordered-sm" src="#" alt="User Image">
             <span class="username">{{replyer}}</span>
@@ -107,7 +107,7 @@
         </div>
         <p>{{reply}}</p>
         <ul class="list-inline">
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-trash margin-r-5"></i> 삭제</a></li>
+            <li data-rno={{rno}} class="delReply"><a href="#" class="link-black text-sm"><i class="fa fa-trash margin-r-5"></i> 삭제</a></li>
             <li><a href="#" class="link-black text-sm"><i class="fa fa-pencil margin-r-5"></i> 수정</a></li>
         </ul>
               
@@ -168,7 +168,8 @@
                 data.push({
                     replyer : arr[i].replyer,
                     replyDate : replyDate,
-                    reply : arr[i].reply
+                    reply : arr[i].reply,
+                    rno: arr[i].rno
                 })  
               }
               
@@ -192,6 +193,22 @@
                 getReply();
             }
         })
+    });
+    
+    $(".replyUL").on("click", ".delReply", function(e){
+        e.preventDefault();
+        var rno = $(this).attr("data-rno");
+        var data = {rno : rno};
+
+        $.ajax({
+          url:'/reply/' + rno,
+          type: 'DELETE',
+          contentType: "application/json; charset=utf-8",
+          data:JSON.stringify(data),
+          success: function(result){
+              $(".reply-box[data-rno="+ rno +"]").remove();
+          }
+        });
     });
 </script>
 
