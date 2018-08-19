@@ -45,6 +45,18 @@
           </div>
         </form>
         <!-- /.box-body -->
+        <div class="box-body">
+			<div class="form-group">
+	            <h5 for="exampleInputFile"><b>File input</b></h5>
+	            <input style="display:inline-block;" type="file" id="uploadFile">
+	            <button id="uploadBtn">업로드</button>
+	        </div>
+		</div>
+        <div class="box-footer">
+          <ul class="mailbox-attachments clearfix fileUL">
+            
+          </ul>
+        </div>
         
         <div class="box-footer">
           <button id="cancelBtn" class="btn btn-default">취소</button>
@@ -69,6 +81,25 @@
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
 
+
+<script type="text/javascript" src="/resources/js/handlebars.min.js"></script>
+
+<script id="fileTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+    <li>
+          {{#if thumbName}}
+            <span class="mailbox-attachment-icon has-img"><img src="/upload/thumb/{{thumbName}}" alt="{{original}}"></span>    
+          {{else}}
+            <span class="mailbox-attachment-icon"><i class="fa fa-file-archive-o"></i></span>
+          {{/if}}
+        
+        <div class="mailbox-attachment-info">
+            <small>{{original}}</small>
+            <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-trash-o"></i></a>
+        </div>
+    </li>
+    {{/each}}
+</script>
 
 <script>
 	var actionForm = $("#actionForm");
@@ -95,6 +126,40 @@
         actionForm.attr("method", "get").attr("action","/board/list");
         actionForm.submit();
     });
+    
+    var fileSource = $('#fileTemplate').html();
+    var fileTemplate = Handlebars.compile(fileSource);
+    
+    $("#uploadBtn").on("click", function(e){
+        e.preventDefault();
+
+        var formData = new FormData();
+        formData.append("file", $("#uploadFile")[0].files[0]);
+
+        $.ajax({
+          url: '/upload/',
+          data: formData,
+          dataType:'json',
+          processData: false,
+          contentType: false,
+          type: 'POST',
+          success: function(data){
+              var files = [];
+              
+              var thumbName;
+              if(data.type === 'image'){
+                  thumbName = data.thumbName;
+              }
+              files.push({
+                  original : data.original,
+                  thumbName : thumbName
+              })
+              $(".fileUL").append(fileTemplate(files)); 
+          }
+        });
+    });
+    
+
     
 
 </script>
