@@ -101,20 +101,20 @@
     {{#each .}}
     <div data-rno={{rno}} class="reply-box post clearfix">
         <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="#" alt="User Image">
+            <img class="img-circle img-bordered-sm" src="/resources/img/basic_profile.png" alt="User Image">
             <span class="username">{{replyer}}</span>
             <span class="description"><i class="fa fa-clock-o margin-r-4"></i> {{replyDate}}</span>
         </div>
-        <p>{{reply}}</p>
+        <p data-rno={{rno}} class="reply-contents">{{reply}}</p>
         <ul class="list-inline">
             <li data-rno={{rno}} class="delReply"><a href="#" class="link-black text-sm"><i class="fa fa-trash margin-r-5"></i> 삭제</a></li>
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-pencil margin-r-5"></i> 수정</a></li>
+            <li data-rno={{rno}} class="modReply"><a href="#" class="link-black text-sm"><i class="fa fa-pencil margin-r-5"></i> 수정</a></li>
         </ul>
               
-        <div class="input-group">
-            <textarea type="text"  style="resize:none;" class="form-control" placeholder="Enter contents"></textarea>
+        <div data-rno="{{rno}}" style="display:none;" class="modifyReply-inputBox input-group">
+            <textarea data-rno="{{rno}}" type="text"  style="resize:none;" class="modifyReply-textarea form-control" placeholder="Enter contents"></textarea>
             <div class="input-group-btn">
-                <button type="button" style="font-size: 15px; line-height:40px;"class="btn btn-success">완료</button>
+                <button data-rno="{{rno}}" type="button" style="font-size: 15px; line-height:40px;"class="modifyBtn btn btn-success">완료</button>
             </div>
         </div>
     </div>
@@ -208,6 +208,51 @@
           success: function(result){
               $(".reply-box[data-rno="+ rno +"]").remove();
           }
+        });
+    });
+    
+    
+    // [수정]을 눌렀을 때
+    $(".replyUL").on("click", ".modReply", function(e){
+        e.preventDefault();
+        var rno = $(this).attr("data-rno");
+        $(this).replaceWith('<li data-rno="'+ rno +'" class="modCancelReply"><a href="#" class="link-black text-sm"><i class="fa fa-remove margin-r-5"></i>수정 취소</a></li>');
+        
+        var replyContents = $(".reply-contents[data-rno="+ rno +"]").text();
+        
+        $(".modifyReply-inputBox[data-rno="+ rno +"]").show("slow");
+        $(".modifyReply-textarea[data-rno="+ rno +"]").val(replyContents);
+    });
+    
+    // [수정취소]을 눌렀을 때
+    $(".replyUL").on("click", ".modCancelReply", function(e){
+        e.preventDefault();
+        var rno = $(this).attr("data-rno");
+        $(this).replaceWith('<li data-rno="'+ rno +'" class="modReply"><a href="#" class="link-black text-sm"><i class="fa fa-pencil margin-r-5"></i> 수정</a></li>');
+        $(".modifyReply-inputBox[data-rno="+ rno +"]").hide();
+        $(".modifyReply-textarea[data-rno="+ rno +"]").val("");
+    });
+    
+    // 수정 입력창에서 [완료]을 눌렀을 때
+    $(".replyUL").on("click", ".modifyBtn", function(e){
+        e.preventDefault();
+        var rno = $(this).attr("data-rno");
+        var modifiedContents = $(".modifyReply-textarea[data-rno="+ rno +"]").val();
+        
+        var data = {reply : modifiedContents};
+        
+        $.ajax({
+            url:'/reply/' + rno,
+            type: 'PUT',
+            contentType: "application/json; charset=utf-8",
+            data:JSON.stringify(data),
+            success: function(result){
+                $(".modCancelReply[data-rno="+ rno +"]")
+                    .replaceWith('<li data-rno="'+ rno +'" class="modReply"><a href="#" class="link-black text-sm"><i class="fa fa-pencil margin-r-5"></i> 수정</a></li>');
+                $(".modifyReply-inputBox[data-rno="+ rno +"]").hide();
+                $(".modifyReply-textarea[data-rno="+ rno +"]").val("");
+                $(".reply-contents[data-rno="+ rno +"]").text(modifiedContents);
+            }
         });
     });
 </script>

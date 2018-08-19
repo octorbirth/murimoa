@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +42,12 @@ public class ReplyController {
     public ResponseEntity<String> removeReply(@PathVariable("rno") Integer rno){
         service.remove(rno);
         return new ResponseEntity<String>("removed",HttpStatus.OK);
+    }
+    
+    @PutMapping("/{rno}")
+    public ResponseEntity<String> updateReply(@PathVariable("rno") Integer rno, @RequestBody ReplyDTO dto){
+        dto.setRno(rno);
+        service.update(dto);
+        return new ResponseEntity<String>("update",HttpStatus.OK);
     }
 }

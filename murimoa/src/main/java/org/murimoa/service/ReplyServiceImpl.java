@@ -27,4 +27,9 @@ public class ReplyServiceImpl implements ReplyService{
     public void remove(Integer rno) {
         mapper.delete(rno);
     }
+    
+    @Override
+    public void update(ReplyDTO dto) {
+        mapper.update(dto);
+    }
 }
