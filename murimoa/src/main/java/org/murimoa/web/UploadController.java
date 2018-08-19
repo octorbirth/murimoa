@@ -1,5 +1,6 @@
 package org.murimoa.web;
 
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,11 +14,15 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.imgscalr.Scalr;
 import org.murimoa.util.MediaUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,5 +75,22 @@ public class UploadController {
     public @ResponseBody byte[] display(@PathVariable("thumbName") String thumbName) throws Exception {
         File file = new File("C:\\zzz\\" + thumbName);
         return FileUtils.readFileToByteArray(file);
+    }
+    
+    @PostMapping("/delete")
+    public ResponseEntity<String> deleteFile(@RequestBody String fileName) {
+        
+        String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+        MediaType mType = MediaUtils.checkType(formatName);
+        
+        String target = fileName.substring(9);
+        
+        if(mType != null){ // 이미지 파일인 경우 썸네일 이미지도 동반삭제      
+          new File("C:\\zzz\\s_" + target ).delete();
+        }
+        new File("C:\\zzz\\" + target ).delete();
+        
+        
+        return new ResponseEntity<String>("deleted", HttpStatus.OK);
     }
 }

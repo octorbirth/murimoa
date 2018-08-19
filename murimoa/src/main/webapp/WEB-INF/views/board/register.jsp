@@ -86,7 +86,7 @@
 
 <script id="fileTemplate" type="text/x-handlebars-template">
     {{#each .}}
-    <li>
+    <li data-file="{{uploadName}}">
           {{#if thumbName}}
             <span class="mailbox-attachment-icon has-img"><img src="/upload/thumb/{{thumbName}}" alt="{{original}}"></span>    
           {{else}}
@@ -95,7 +95,7 @@
         
         <div class="mailbox-attachment-info">
             <small>{{original}}</small>
-            <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-trash-o"></i></a>
+            <a data-file="{{uploadName}}" href="#" class="btn btn-default btn-xs pull-right delFile"><i class="fa fa-trash-o"></i></a>
         </div>
     </li>
     {{/each}}
@@ -152,13 +152,29 @@
               }
               files.push({
                   original : data.original,
-                  thumbName : thumbName
+                  thumbName : thumbName,
+                  uploadName : data.uploadName
               })
               $(".fileUL").append(fileTemplate(files)); 
           }
         });
     });
     
+    $(".fileUL").on("click", ".delFile", function(e){
+        e.preventDefault();
+        var targetName = $(this).attr("data-file");
+        var target = $("li[data-file='" + targetName + "']");
+        
+        $.ajax({
+            url: '/upload/delete',
+            data: {fileName : targetName},
+            dataType:'json',
+            type: 'POST',
+            success: function(result){ }
+          });
+
+        target.remove();
+    });
 
     
 
