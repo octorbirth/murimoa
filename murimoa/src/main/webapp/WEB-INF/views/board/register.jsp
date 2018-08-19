@@ -116,6 +116,15 @@
         var writer= 'h';
         mainForm.append("<input type='hidden' name='writer' value='"+writer+"'>");
         mainForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
+        
+        $(".fileUL li").each(function(idx){
+            
+            var fileName = $(this).attr("data-file");
+            var str = "<input type='hidden' name='ufile["+ idx +"]' value='"+fileName+"'>";
+            
+            mainForm.append(str);
+        });
+        
         mainForm.submit();
     });
     

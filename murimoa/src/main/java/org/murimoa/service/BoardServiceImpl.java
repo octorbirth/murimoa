@@ -8,6 +8,8 @@ import org.murimoa.dto.BoardDTO;
 import org.murimoa.dto.Criteria;
 import org.murimoa.dto.GroupDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.murimoa.mapper.AttachMapper;
 import org.murimoa.mapper.BoardMapper;
 
 import lombok.extern.java.Log;
@@ -19,9 +21,19 @@ public class BoardServiceImpl implements BoardService{
 	@Inject
     private BoardMapper BoardMapper;
 	
+    @Inject
+    private AttachMapper attachMapper;
+	
+    @Transactional
 	@Override
 	public void register(BoardDTO dto) {
 		BoardMapper.insert(dto);
+        String[] ufiles = dto.getUfile();
+        if(ufiles != null) {
+            Arrays.stream(ufiles).forEach((name)->{
+                attachMapper.insert(name);
+            });
+        }
 	}
 
 	@Override

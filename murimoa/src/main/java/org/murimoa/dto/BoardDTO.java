@@ -12,4 +12,5 @@ public class BoardDTO {
     private String writer;
     private Long gno;
     private Date regdate;
+    private String[] ufile;
 }
