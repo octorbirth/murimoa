@@ -74,4 +74,9 @@ public class AttendServiceImpl implements AttendService{
 			
 	}
 
+	@Override
+	public List<AttendDTO> countAttend(AttendDTO dto) {
+		return attendMapper.countAttend(dto);
+	}
+
 }

@@ -50,6 +50,29 @@
 	            <!-- /.box-body -->
 	          	</div>
           		<!-- /.box -->
+          		
+          		<div class="box box-solid">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">My Attendance</h3>
+		                  
+		              <div class="box-tools">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		                </button>
+		              </div>
+		            </div>
+		            <div class="box-body no-padding">
+		            <div style="padding: 0 5%; margin-top:5px">
+					  <div class="clearfix">
+	                    <small class="pull-left"><span id="yourAttend"></span> / <span id="totalAttend"></span></small>
+	                  </div>
+	                  <div class="progress xs">
+	                    
+	                  </div>
+	                </div>  
+		            </div>
+		            <!-- /.box-body -->
+	          	</div>
+	          	<!-- /.box -->
         	</div>
         	<!-- /.col -->
 	        <div class="col-md-9">
@@ -205,6 +228,30 @@
             self.location="/board/list?page="+pageNum+"&gno="+${groupInfo.gno};
         }
     });
+    
+    function getAttendInfo(){
+        var data = [];
+        $.getJSON("/attend/countAttend/" + ${groupInfo.gno} + "/mid/AB1", function(arr){
+        	var yourAttend = 0;
+        	var totalAttend = 0;
+        	var count = 0;
+            for(var i=0; i< arr.length; i++){
+              	totalAttend++;
+			  	if(arr[i].attend === 'Y'){
+			  		yourAttend++;	
+			  	}
+			  	
+			  	count = Math.round(yourAttend/totalAttend * 100);
+            }
+            
+            $("#yourAttend").html(yourAttend.toString());
+            $("#totalAttend").html(totalAttend.toString());
+            $(".progress").html('<div class="progress-bar progress-bar-green" style="width: '+count+'%;"></div>');
+            
+       	});
+      }
+    
+    getAttendInfo();
     
 
 </script>

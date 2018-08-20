@@ -2,6 +2,7 @@ package org.murimoa.web;
 
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.java.Log;
@@ -88,6 +92,14 @@ public class AttendController {
 		rttr.addAttribute("lno", dto.getLno());
 		rttr.addFlashAttribute("result", "attendModifySuccess");
 		return "redirect:/attend/view";
+	}
+	
+	@GetMapping("/countAttend/{gno}/mid/{mid}")
+	public @ResponseBody List<AttendDTO> countAttend(@PathVariable("gno") Long gno, @PathVariable("mid") String mid) {
+		AttendDTO dto = new AttendDTO();
+		dto.setGno(gno);
+		dto.setMid(mid);
+		return attendService.countAttend(dto);
 	}
     
     

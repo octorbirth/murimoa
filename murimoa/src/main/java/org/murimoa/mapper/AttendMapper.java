@@ -34,4 +34,6 @@ public interface AttendMapper {
     @Update("update tbl_attend set attend=#{attend} where mid = #{mid} and lno = #{lno}")
 	public void updateAttend(@Param("attend") String attend, @Param("mid")String mid, @Param("lno") Long lno);
 
+	public List<AttendDTO> countAttend(AttendDTO dto);
+
 }

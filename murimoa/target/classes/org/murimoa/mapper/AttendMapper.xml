@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.murimoa.mapper.AttendMapper">
+    <select id="countAttend" resultType="AttendDTO">
+		select t1.attend, t1.lno from tbl_attend t1,
+			(select lno from tbl_lecture where gno = #{gno}) t2 where t1.mid=#{mid} and t1.lno = t2.lno
+    </select>    
+</mapper>
