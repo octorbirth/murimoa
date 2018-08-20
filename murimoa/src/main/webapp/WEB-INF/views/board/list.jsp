@@ -55,11 +55,11 @@
 	        <div class="col-md-9">
 	          <div class="nav-tabs-custom">
 	            <ul class="nav nav-tabs">
-	              <li class="active"><a href="#activity" data-toggle="tab">게시판</a></li>
-	              <li><a href="#timeline" data-toggle="tab">출결</a></li>
+	              <li class="active"><a href="#board" data-toggle="tab">게시판</a></li>
+	              <li><a href="#attend" data-toggle="tab">출결</a></li>
 	            </ul>
 	            <div class="tab-content">
-	              <div class="active tab-pane" id="activity">
+	              <div class="active tab-pane" id="board">
 	                <div class="box-body no-padding">
 	       				<table class="table table-striped">
 				            <tr>
@@ -91,8 +91,24 @@
 			        </div>
 	              </div>
 	              <!-- /.tab-pane -->
+	              
+	              <div class="tab-pane" id="attend">
+	                <div class="box-body no-padding">
+	       				
+			        </div>
+			        
+	                <div class="box-footer clearfix">
+	
+			          <button id="attendRegistBtn" type="button" class="btn btn-default pull-right">
+			          		<i class="fa fa-plus"></i> 출석
+			          </button>
+			        </div>
+	              </div>
+	              <!-- /.tab-pane -->
 	            </div>
 	            <!-- /.tab-content -->
+	            
+
 	          </div>
 	          <!-- /.nav-tabs-custom -->
 	        </div>
@@ -126,6 +142,13 @@
         actionForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
         actionForm.append("<input type='hidden' name='page' value='${cri.page}'>");
         actionForm.attr("method", "get").attr("action","/board/register");
+        actionForm.submit();
+    });
+    
+    $("#attendRegistBtn").on("click",function(e){
+        e.preventDefault();
+        actionForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
+        actionForm.attr("method", "get").attr("action","/attend/register");
         actionForm.submit();
     });
 	
