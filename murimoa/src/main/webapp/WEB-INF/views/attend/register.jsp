@@ -32,6 +32,7 @@
             <small>register</small>
           </h3>
         </div>
+        <form method='post' id='mainForm'>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
@@ -44,13 +45,15 @@
               	<td>${status.count}</td>
               	<td>${item.mid}</td>
               	<td><label class='switch'>
-            		<input type='checkbox'>
+            		<input name='attendMemberList' value='${item.mid}' type='checkbox'>
             		<span class='slider round'></span>
           		</label></td>
               </tr>
+              <input type='hidden' name='groupMemberList' value='${item.mid}'>
               </c:forEach>
             </table>
           </div>
+        </form>
           <!-- /.box-body -->
                   
         <div class="box-footer">
@@ -80,11 +83,17 @@
 
 <script>
 	var actionForm = $("#actionForm");
+	var mainForm = $("#mainForm");
 	$("#cancelBtn").on("click",function(e){
 	    e.preventDefault();
 	    actionForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
 	    actionForm.attr("method", "get").attr("action","/board/list");
 	    actionForm.submit();
+	});
+	
+	$("#createBoard").on("click", function(e) {
+		e.preventDefault();
+		mainForm.submit();
 	});
 
 </script>
