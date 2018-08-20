@@ -58,6 +58,13 @@ public class AttendController {
 		model.addAttribute("attendMemberList", attendService.getAttendMemberList(dto));
 		return;
 	}
+	
+	@PostMapping("/remove")
+	public String remove(RedirectAttributes rttr, AttendDTO dto) {
+		attendService.remove(dto);
+		rttr.addFlashAttribute("result", "attendDeleteSuccess");
+		return "redirect:/board/list?gno=" + dto.getGno();
+	}
     
     
 }

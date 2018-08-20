@@ -15,4 +15,6 @@ public interface AttendService {
 
 	public List<AttendDTO> getAttendMemberList(AttendDTO dto);
 
+	public void remove(AttendDTO dto);
+
 }

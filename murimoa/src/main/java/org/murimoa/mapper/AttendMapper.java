@@ -2,6 +2,7 @@ package org.murimoa.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -22,4 +23,11 @@ public interface AttendMapper {
 
     @Select("select * from tbl_attend where lno = #{lno}")
 	public List<AttendDTO> getAttendMemberList(AttendDTO dto);
+
+    @Delete("delete from tbl_attend where lno = #{lno}")
+	public void deleteAttend(AttendDTO dto);
+    
+    @Delete("delete from tbl_lecture where lno = #{lno}")
+	public void deleteLecture(AttendDTO dto);
+
 }

@@ -171,7 +171,21 @@
     		  showConfirmButton: false,
     		  timer: 1200
     	})
-    }
+    }else if (msg === 'attendRegisterSuccess') {
+    	swal({
+  		  type: 'success',
+  		  title: '출석 등록 완료!',
+  		  showConfirmButton: false,
+  		  timer: 1200
+  		})
+  	}else if(msg === 'attendDeleteSuccess'){
+  		swal({
+    		  type: 'success',
+    		  title: '출석 삭제 완료!',
+    		  showConfirmButton: false,
+    		  timer: 1200
+    	})
+  	}
     
     var pageStr = makePage({
         pageSize : 10, // 한 페이지 당 보여지는 데이터의 양
@@ -192,15 +206,7 @@
         }
     });
     
-    var msg = '${result}';
-    if (msg === 'attendRegisterSuccess') {
-    	swal({
-    		  type: 'success',
-    		  title: '출석 등록 완료!',
-    		  showConfirmButton: false,
-    		  timer: 1200
-    	})
-    }
+
 </script>
 </body>
 </html>

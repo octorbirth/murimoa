@@ -55,4 +55,11 @@ public class AttendServiceImpl implements AttendService{
 		return attendMapper.getAttendMemberList(dto);
 	}
 
+	@Transactional
+	@Override
+	public void remove(AttendDTO dto) {
+		attendMapper.deleteAttend(dto);
+		attendMapper.deleteLecture(dto);
+	}
+
 }

@@ -96,6 +96,14 @@
 	    actionForm.submit();
 	});
 	
+	$("#deleteBtn").on("click",function(e){
+        e.preventDefault();
+        actionForm.append("<input type='hidden' name='gno' value='${AttendInfo.gno}'>");
+        actionForm.append("<input type='hidden' name='lno' value='${AttendInfo.lno}'>");
+        actionForm.attr("method", "post").attr("action","/attend/remove").submit();
+	
+	});
+	
 
 </script>
 
