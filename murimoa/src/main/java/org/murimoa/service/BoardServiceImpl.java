@@ -19,7 +19,7 @@ import lombok.extern.java.Log;
 public class BoardServiceImpl implements BoardService{
 	
 	@Inject
-    private BoardMapper BoardMapper;
+    private BoardMapper boardMapper;
 	
     @Inject
     private AttachMapper attachMapper;
@@ -27,7 +27,7 @@ public class BoardServiceImpl implements BoardService{
     @Transactional
 	@Override
 	public void register(BoardDTO dto) {
-		BoardMapper.insert(dto);
+		boardMapper.insert(dto);
         String[] ufiles = dto.getUfile();
         if(ufiles != null) {
             attachMapper.insert(ufiles);
@@ -36,25 +36,27 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public List<BoardDTO> list(Criteria cri) {
-		cri.setTotal(BoardMapper.getTotal(cri));
-		return BoardMapper.getList(cri);
+		cri.setTotal(boardMapper.getTotal(cri));
+		return boardMapper.getList(cri);
 	}
 
 	@Override
 	public BoardDTO get(BoardDTO dto) {
-		 return BoardMapper.getBoard(dto);
+		 return boardMapper.getBoard(dto);
 	}
 	
+    @Transactional
     @Override
     public void delete(BoardDTO dto) {
-    	BoardMapper.remove(dto);
+    	boardMapper.remove(dto);
+        attachMapper.delete(dto);
         return;
     }
     
     @Override
     public void modify(BoardDTO dto) {
     	
-    	BoardMapper.update(dto);
+    	boardMapper.update(dto);
         return;
     }
     
