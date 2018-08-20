@@ -44,4 +44,9 @@ public class AttendServiceImpl implements AttendService{
 		
 	}
 
+	@Override
+	public List<AttendDTO> getAttendList(GroupDTO dto) {
+		return attendMapper.getAttendList(dto);
+	}
+
 }

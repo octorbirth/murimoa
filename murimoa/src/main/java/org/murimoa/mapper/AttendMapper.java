@@ -1,8 +1,12 @@
 package org.murimoa.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.murimoa.dto.AttendDTO;
+import org.murimoa.dto.GroupDTO;
 
 public interface AttendMapper {
 
@@ -13,4 +17,6 @@ public interface AttendMapper {
     @Insert("insert into tbl_attend (lno, mid, attend) values (LAST_INSERT_ID(),  #{mid}, #{attend})")
 	public void registerAttend(@Param("mid") String groupMember, @Param("attend") String attend);
 
+    @Select("select * from tbl_lecture where gno = #{gno}")
+	public List<AttendDTO> getAttendList(GroupDTO dto);
 }

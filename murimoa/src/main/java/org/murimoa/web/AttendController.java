@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import lombok.extern.java.Log;
 
 @Controller
@@ -30,7 +32,7 @@ public class AttendController {
     }
     
     @PostMapping("/register")
-	public String register(AttendDTO dto) {
+	public String register(RedirectAttributes rttr,AttendDTO dto) {
     	
     	String[] attendMeberList = dto.getAttendMemberList();
     	String[] groupMeberList = dto.getGroupMemberList();
@@ -47,6 +49,7 @@ public class AttendController {
 
     	attendService.registerAttend(dto);
 		
+    	rttr.addFlashAttribute("result", "attendRegisterSuccess");
 		return "redirect:/board/list?gno=" + dto.getGno();
 	}
 }

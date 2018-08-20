@@ -94,7 +94,18 @@
 	              
 	              <div class="tab-pane" id="attend">
 	                <div class="box-body no-padding">
-	       				
+	       				<table class="table table-hover">
+			              <tr>
+			              	<th>#</th>
+			                <th>출석날짜</th>
+			              </tr>
+			              <c:forEach var="item" items="${attendList}" varStatus="status">
+			              <tr>
+			              	<td>${status.count}</td>
+			              	<td><fmt:formatDate value="${item.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
+			              </tr>
+			              </c:forEach>
+			            </table>
 			        </div>
 			        
 	                <div class="box-footer clearfix">
@@ -180,6 +191,16 @@
             self.location="/board/list?page="+pageNum+"&gno="+${groupInfo.gno};
         }
     });
+    
+    var msg = '${result}';
+    if (msg === 'attendRegisterSuccess') {
+    	swal({
+    		  type: 'success',
+    		  title: '출석 등록 완료!',
+    		  showConfirmButton: false,
+    		  timer: 1200
+    	})
+    }
 </script>
 </body>
 </html>

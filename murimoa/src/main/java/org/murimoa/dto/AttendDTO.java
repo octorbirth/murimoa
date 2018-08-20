@@ -9,6 +9,7 @@ public class AttendDTO {
 	private String[] attendMemberList;
 	private String[] groupMemberList;
 	private String[] attendList;
-    private Long gno;
+    private Long gno, lno;
+    private String mid;
 	private Date regdate;
 }

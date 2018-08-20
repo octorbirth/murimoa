@@ -11,4 +11,6 @@ public interface AttendService {
 
 	public void registerAttend(AttendDTO dto);
 
+	public List<AttendDTO> getAttendList(GroupDTO dto);
+
 }

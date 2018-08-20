@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.murimoa.dto.BoardDTO;
 import org.murimoa.dto.Criteria;
 import org.murimoa.dto.GroupDTO;
+import org.murimoa.service.AttendService;
 import org.murimoa.service.BoardService;
 import org.murimoa.service.GroupService;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,15 @@ public class BoardController {
     
     @Inject
     private BoardService boardService;
+    
+    @Inject
+    private AttendService attendService;
 	
     @GetMapping("/list")
     public void listGet(Model model, GroupDTO dto, @ModelAttribute("cri") Criteria cri) {
     	model.addAttribute("groupInfo", groupService.getinfo(dto));
     	model.addAttribute("boardList", boardService.list(cri));
+    	model.addAttribute("attendList",attendService.getAttendList(dto));
     }
     
     @GetMapping("/register")
