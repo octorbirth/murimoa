@@ -57,5 +57,10 @@ public class BoardServiceImpl implements BoardService{
     	BoardMapper.update(dto);
         return;
     }
+    
+    @Override
+    public List<String> getFileList(Long bno) {
+        return attachMapper.getfiles(bno);
+    }
 
 }

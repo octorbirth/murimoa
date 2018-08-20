@@ -46,6 +46,11 @@
               <pre style="background-color: white">${boardInfo.contents}</pre>
             </div>
           </div>
+          <div class="box-footer">
+          	<ul class="mailbox-attachments clearfix fileUL">
+            
+          	</ul>
+          </div>
 
           <div class="box-footer">
             <div class="pull-right">
@@ -118,6 +123,23 @@
             </div>
         </div>
     </div>
+    {{/each}}
+</script>
+
+<script id="fileTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+    <li>
+          {{#if thumbName}}
+            <span class="mailbox-attachment-icon has-img"><img src="/upload/thumb/{{thumbName}}" alt="{{original}}"></span>    
+          {{else}}
+            <span class="mailbox-attachment-icon"><i class="fa fa-file-archive-o"></i></span>
+          {{/if}}
+        
+        <div class="mailbox-attachment-info">
+            <small>{{original}}</small>
+            <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+        </div>
+    </li>
     {{/each}}
 </script>
 
@@ -254,6 +276,40 @@
                 $(".reply-contents[data-rno="+ rno +"]").text(modifiedContents);
             }
         });
+    });
+    
+    
+    var fileSource = $('#fileTemplate').html();
+    var fileTemplate = Handlebars.compile(fileSource);
+    
+    function checkImageType(fileName){
+        var pattern = /jpg|gif|png|jpeg/i;    
+        return fileName.match(pattern);
+    }
+    
+    function getInfo(fullName){
+        var fileName, thumbName;
+        if(checkImageType(fullName)){  // 이미지 파일 이라면
+            thumbName = "s_" + fullName;
+        }
+        fileName = fullName.substr(fullName.indexOf("_")+1);
+        return  {fileName:fileName, fullName:fullName, thumbName:thumbName};
+    }
+    
+    
+    $.getJSON("/upload/list/" + ${boardInfo.bno}, function(arr){
+        for(var i=0; i< arr.length; i++){
+            var fileInfomation = [];
+            var file = getInfo(arr[i]);
+
+            fileInfomation.push({
+                original : file.fileName,
+                thumbName : file.thumbName
+            })
+
+            $(".fileUL").append(fileTemplate(fileInfomation));    
+        }
+        
     });
 </script>
 
