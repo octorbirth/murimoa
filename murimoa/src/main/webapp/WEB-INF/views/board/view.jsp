@@ -137,7 +137,11 @@
         
         <div class="mailbox-attachment-info">
             <small>{{original}}</small>
-            <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+            {{#if thumbName}}
+            	<a target='_blank' href='/upload/thumb/{{uploadName}}' class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>    
+            {{else}}
+                <a href="/upload/download/{{uploadName}}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>                
+            {{/if}}
         </div>
     </li>
     {{/each}}
@@ -304,7 +308,8 @@
 
             fileInfomation.push({
                 original : file.fileName,
-                thumbName : file.thumbName
+                thumbName : file.thumbName,
+                uploadName : file.fullName
             })
 
             $(".fileUL").append(fileTemplate(fileInfomation));    
