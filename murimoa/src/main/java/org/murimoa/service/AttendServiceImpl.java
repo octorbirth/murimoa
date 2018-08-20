@@ -49,4 +49,10 @@ public class AttendServiceImpl implements AttendService{
 		return attendMapper.getAttendList(dto);
 	}
 
+	@Override
+	public List<AttendDTO> getAttendMemberList(AttendDTO dto) {
+		
+		return attendMapper.getAttendMemberList(dto);
+	}
+
 }

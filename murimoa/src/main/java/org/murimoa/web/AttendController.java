@@ -52,4 +52,12 @@ public class AttendController {
     	rttr.addFlashAttribute("result", "attendRegisterSuccess");
 		return "redirect:/board/list?gno=" + dto.getGno();
 	}
+    
+	@GetMapping("/view")
+	public void view(@ModelAttribute("AttendInfo") AttendDTO dto, Model model) {
+		model.addAttribute("attendMemberList", attendService.getAttendMemberList(dto));
+		return;
+	}
+    
+    
 }

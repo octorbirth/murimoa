@@ -11,5 +11,6 @@ public class AttendDTO {
 	private String[] attendList;
     private Long gno, lno;
     private String mid;
+    private String attend;
 	private Date regdate;
 }

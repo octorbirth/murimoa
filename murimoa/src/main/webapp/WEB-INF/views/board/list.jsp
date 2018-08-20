@@ -102,7 +102,7 @@
 			              <c:forEach var="item" items="${attendList}" varStatus="status">
 			              <tr>
 			              	<td>${status.count}</td>
-			              	<td><fmt:formatDate value="${item.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
+			              	<td><a href="/attend/view?gno=${groupInfo.gno}&lno=${item.lno}"><fmt:formatDate value="${item.regdate}" pattern="yyyy-MM-dd HH:mm"/></a></td>
 			              </tr>
 			              </c:forEach>
 			            </table>
