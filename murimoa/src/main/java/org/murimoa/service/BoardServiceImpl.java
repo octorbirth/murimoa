@@ -53,10 +53,21 @@ public class BoardServiceImpl implements BoardService{
         return;
     }
     
+    @Transactional
     @Override
     public void modify(BoardDTO dto) {
     	
     	boardMapper.update(dto);
+    	
+        attachMapper.delete(dto); 
+        
+        Long bno = dto.getBno();
+        String[] ufiles = dto.getUfile();
+        if(ufiles != null) {
+            Arrays.stream(ufiles).forEach((name)->{ 
+                attachMapper.modInsert(name, bno); 
+            });
+        }
         return;
     }
     
