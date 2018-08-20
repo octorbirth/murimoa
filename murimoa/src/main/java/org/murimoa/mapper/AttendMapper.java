@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.murimoa.dto.AttendDTO;
 import org.murimoa.dto.GroupDTO;
 
@@ -29,5 +30,8 @@ public interface AttendMapper {
     
     @Delete("delete from tbl_lecture where lno = #{lno}")
 	public void deleteLecture(AttendDTO dto);
+
+    @Update("update tbl_attend set attend=#{attend} where mid = #{mid} and lno = #{lno}")
+	public void updateAttend(@Param("attend") String attend, @Param("mid")String mid, @Param("lno") Long lno);
 
 }

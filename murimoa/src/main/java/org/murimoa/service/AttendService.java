@@ -17,4 +17,6 @@ public interface AttendService {
 
 	public void remove(AttendDTO dto);
 
+	public void modify(AttendDTO dto);
+
 }

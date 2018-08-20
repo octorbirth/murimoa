@@ -62,4 +62,16 @@ public class AttendServiceImpl implements AttendService{
 		attendMapper.deleteLecture(dto);
 	}
 
+	@Override
+	public void modify(AttendDTO dto) {
+		
+    	String[] groupMemberList = dto.getGroupMemberList();
+    	String[] attendList = dto.getAttendList();
+    	
+    	for(int i=0; i<groupMemberList.length;i++) {
+    		attendMapper.updateAttend(attendList[i], groupMemberList[i], dto.getLno());	
+    	}
+			
+	}
+
 }

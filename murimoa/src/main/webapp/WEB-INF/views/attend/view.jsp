@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/resources/css/AdminLTE.css">
   <link rel="stylesheet" href="/resources/css/_all-skins.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+  <link rel="stylesheet" href="/resources/sweetalert2/dist/sweetalert2.min.css">
   <link rel="stylesheet" href="/resources/css/attend.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -85,6 +85,9 @@
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
 
+<script src="/resources/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="/resources/sweetalert2/dist/sweetalert2.min.js"></script>
 <script>
 	var actionForm = $("#actionForm");
 	var mainForm = $("#mainForm");
@@ -103,6 +106,23 @@
         actionForm.attr("method", "post").attr("action","/attend/remove").submit();
 	
 	});
+	
+	$("#modifyBtn").on("click",function(e){
+        e.preventDefault();
+        mainForm.append("<input type='hidden' name='gno' value='${AttendInfo.gno}'>");
+        mainForm.append("<input type='hidden' name='lno' value='${AttendInfo.lno}'>");
+        mainForm.attr("method", "post").attr("action","/attend/modify").submit();
+	});
+	
+	var msg = '${result}';
+    if (msg === 'attendModifySuccess') {
+    	swal({
+    		  type: 'success',
+    		  title: '저장되었습니다 :-)',
+    		  showConfirmButton: false,
+    		  timer: 1200
+    	})
+    }
 	
 
 </script>

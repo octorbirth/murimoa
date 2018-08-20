@@ -65,6 +65,30 @@ public class AttendController {
 		rttr.addFlashAttribute("result", "attendDeleteSuccess");
 		return "redirect:/board/list?gno=" + dto.getGno();
 	}
+	
+	@PostMapping("/modify")
+	public String modify(RedirectAttributes rttr, AttendDTO dto) {
+		
+    	String[] attendMeberList = dto.getAttendMemberList();
+    	String[] groupMeberList = dto.getGroupMemberList();
+    	String[] attendList = new String[groupMeberList.length];
+    	
+    	for(int i=0; i<groupMeberList.length; i++) {
+    		if(Arrays.asList(attendMeberList).contains(groupMeberList[i])) {
+    			attendList[i] = "Y";
+    		}else {
+    			attendList[i] = "N";
+    		}
+    	}
+    	dto.setAttendList(attendList);
+		
+		attendService.modify(dto);
+		
+		rttr.addAttribute("gno", dto.getGno());
+		rttr.addAttribute("lno", dto.getLno());
+		rttr.addFlashAttribute("result", "attendModifySuccess");
+		return "redirect:/attend/view";
+	}
     
     
 }
