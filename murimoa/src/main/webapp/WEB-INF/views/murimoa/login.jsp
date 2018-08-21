@@ -24,10 +24,10 @@
 
     <form action="/murimoa/login" method="post">
       <div class="form-group has-feedback">
-        <input name="mid" class="form-control" placeholder="ID" value="A1">
+        <input name="mid" class="form-control" placeholder="ID" value="a1">
       </div>
       <div class="form-group has-feedback">
-        <input name="mpw" type="password" class="form-control" placeholder="Password" value="A1">
+        <input name="mpw" type="password" class="form-control" placeholder="Password" value="a1">
       </div>
       <div class="row">
         <div class="col-xs-8">

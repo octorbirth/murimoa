@@ -6,19 +6,42 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="#" class="img-circle userImage" alt="User Image">
+          <img src="/upload/thumb/${memberDTO.image}" class="img-circle userImage" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p class="userName">유저이름</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 유저아이디</a>
+          <p class="userName">${memberDTO.name}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> ${memberDTO.mid}</a>
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"></li>
-        <li class="active"><a href="/board/list"><i class="fa fa-dashboard"></i> <span>게시판</span></a></li>
-        <li><a href="/member/profile"><i class="fa fa-book"></i> <span>프로필</span></a></li>
+        <li><a href="/murimoa/main"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
+        <li><a href="/murimoa/profile"><i class="fa fa-book"></i> <span>Profile</span></a></li>
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i>
+            <span>My Groups</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="charts/chartjs.html"><i class="fa fa-circle-o"></i> 그룹1</a></li>
+            <li><a href="charts/morris.html"><i class="fa fa-circle-o"></i> 그룹2</a></li>
+            <li><a href="charts/flot.html"><i class="fa fa-circle-o"></i> 그룹3</a></li>
+            <li><a href="charts/inline.html"><i class="fa fa-circle-o"></i> 그룹4</a></li>
+          </ul>
+        </li>
+        
+        
         <li class="header"></li>
-        <li><a href="/login"><i class="fa fa-circle-o text-red"></i> <span>Logout</span></a></li>
+        <li><a href="/murimoa/login"><i class="fa fa-circle-o text-red"></i> <span>Logout</span></a></li>
+
       </ul>
     </section>
   </aside>
+  
+  <script>
+  
+  </script>

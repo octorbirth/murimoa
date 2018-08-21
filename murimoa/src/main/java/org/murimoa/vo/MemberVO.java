@@ -7,5 +7,6 @@ import lombok.Data;
 @Data
 public class MemberVO {
     private String mid, mpw, name;
+    private String image;
     private Date regdate;
 }
