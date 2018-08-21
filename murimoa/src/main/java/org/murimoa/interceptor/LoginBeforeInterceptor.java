@@ -20,6 +20,21 @@ public class LoginBeforeInterceptor extends HandlerInterceptorAdapter{
     @Autowired
     private MemberService service;
 	
+    private void saveDest(HttpServletRequest req) {
+        String uri = req.getRequestURI();
+        String query = req.getQueryString();
+
+        if (query == null || query.equals("null")) {
+          query = "";
+        } else {
+          query = "?" + query;
+        }
+
+        if (req.getMethod().equals("GET")) {
+          req.getSession().setAttribute("dest", uri + query);
+        }
+    }
+    
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -48,6 +63,7 @@ public class LoginBeforeInterceptor extends HandlerInterceptorAdapter{
               }
                             
          }
+         saveDest(request);
          response.sendRedirect("/murimoa/login");
          return false;
     }

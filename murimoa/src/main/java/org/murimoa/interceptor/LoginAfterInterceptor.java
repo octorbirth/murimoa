@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.murimoa.vo.MemberVO;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,8 @@ public class LoginAfterInterceptor extends HandlerInterceptorAdapter{
             return;
         }
         
+        HttpSession session = request.getSession();
+        
         Map<String, Object> map = modelAndView.getModel();  
         
         if(map.get("memberDTO") != null) { // 로그인 성공했다면 not null
@@ -34,6 +37,13 @@ public class LoginAfterInterceptor extends HandlerInterceptorAdapter{
                 loginCookie.setMaxAge(12*60*60); // 12시간 지속
                 response.addCookie(loginCookie);
             }
+            
+            Object dest = session.getAttribute("dest");
+            if(dest != null) {
+                response.sendRedirect((String)dest);
+                return;
+            }
+            
             response.sendRedirect("/murimoa/main");
             return;
         }
