@@ -8,6 +8,7 @@ import org.murimoa.dto.GroupDTO;
 import org.murimoa.dto.ReplyDTO;
 import org.murimoa.service.GroupService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,6 +51,11 @@ public class GroupController {
     @PostMapping("/signup")
     public @ResponseBody void signup(@RequestBody GroupDTO dto) {
         service.signup(dto);
+    }
+    
+    @GetMapping("/manager")
+    public void managerGet(Model model, GroupDTO dto) {
+    	model.addAttribute("groupInfo", service.getinfo(dto));
     }
 	
 }

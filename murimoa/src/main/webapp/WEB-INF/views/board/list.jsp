@@ -45,7 +45,7 @@
 		                </li>
 		              </ul>
 		
-		              <a href="#" class="btn btn-primary btn-block"><b>그룹관리</b></a>
+		              <a href="/group/manager?gno=${groupInfo.gno}" class="btn btn-primary btn-block"><b>그룹관리</b></a>
 		            </div>
 	            <!-- /.box-body -->
 	          	</div>
