@@ -10,4 +10,6 @@ public interface GroupService {
 	public List<GroupDTO> getMyGroup();
 
 	public GroupDTO getinfo(GroupDTO dto);
+
+	public List<GroupDTO> getAllGroups();
 }

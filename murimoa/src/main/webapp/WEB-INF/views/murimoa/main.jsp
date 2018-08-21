@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/resources/css/AdminLTE.css">
   <link rel="stylesheet" href="/resources/css/_all-skins.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="/resources/css/ionicons.css">
   <link rel="stylesheet" href="/resources/sweetalert2/dist/sweetalert2.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -33,6 +34,20 @@
 	<section class="content">
       <div class="row" id="myGroupList">
       
+      </div>
+     
+      
+     </section>
+     
+     
+    <section class="content-header">
+      <h1>전체 그룹<small>All Groups</small></h1>
+    </section>
+
+
+	<section class="content">
+      <div class="row" id="allGroupList">
+        
       </div>
      
       
@@ -73,6 +88,23 @@
         </div>
     {{/each}}
 </script>
+
+<script id="allGroupsTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+		<div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">{{groupName}}</span>
+              <span class="info-box-text">그룹리더</span>
+			  <span class="info-box-number">{{memberCount}} </span>
+            </div>
+          </div>
+        </div>
+    {{/each}}
+</script>
+
 <script>
 var myGroupSource = $('#myGroupTemplate').html();
 var myGroupTemplate = Handlebars.compile(myGroupSource);
@@ -93,6 +125,25 @@ function getMyGroup(){
   }
 
 getMyGroup();
+
+var allGroupsSource = $('#allGroupsTemplate').html();
+var allGroupsTemplate = Handlebars.compile(allGroupsSource);
+function getAllGroups(){
+    var data = [];
+    
+    $.getJSON("/group/allgroups/", function(arr){
+          for(var i=0; i< arr.length; i++){
+            data.push({
+            	groupName : arr[i].name,
+            	memberCount : arr[i].memberCount
+            })  
+          }
+          
+          $("#allGroupList").append(allGroupsTemplate(data));
+   });
+  }
+
+getAllGroups();
 
 var actionForm = $("#actionForm");
 $("#registerBtn").on("click",function(e){

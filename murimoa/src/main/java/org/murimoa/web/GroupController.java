@@ -40,4 +40,9 @@ public class GroupController {
 		return service.getMyGroup();
     }
 	
+	@GetMapping("/allgroups")
+    public @ResponseBody List<GroupDTO> allGroupList(){
+		return service.getAllGroups();
+    }
+	
 }

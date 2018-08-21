@@ -34,4 +34,9 @@ public class GroupServiceImpl implements GroupService{
 		return info;
 	}
 
+	@Override
+	public List<GroupDTO> getAllGroups() {
+		return mapper.getAllGroups();
+	}
+
 }

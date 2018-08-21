@@ -22,5 +22,7 @@ public interface GroupMapper {
 
     @Select("select * from tbl_group_member where gno = #{gno}")
 	public List<GroupDTO> getMemberList(GroupDTO dto);
+
+	public List<GroupDTO> getAllGroups();
     
 }
