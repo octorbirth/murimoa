@@ -62,10 +62,8 @@
 		              </div>
 		            </div>
 		            <div class="box-body no-padding">
-		              <ul class="nav nav-pills nav-stacked">
-		                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-		                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-		                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
+		              <ul id="signupMemberUL"class="nav nav-pills nav-stacked">
+
 		              </ul>
 		            </div>
 		            <!-- /.box-body -->
@@ -98,8 +96,44 @@
 
 <script src="/resources/js/bootstrap.js"></script>
 <script src="/resources/js/adminlte.js"></script>
+
+<script type="text/javascript" src="/resources/js/handlebars.min.js"></script>
+<script id="signupMemberTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+		<li>
+		<div class="box-header with-border">
+        	<div class="user-block">
+            	<img class="img-circle" src="/resources/img/profile.png" alt="User Image">
+                <span class="username">{{mid}}</span>
+            </div>
+			<div class="box-tools">
+            	<button type="button" class="btn btn-box-tool"><i class="fa fa-circle-o"></i></button>
+                <button type="button" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
+            </div>
+            
+        </div>
+		</li>
+    {{/each}}
+</script>
 <script>
 
+
+var signupMemberSource = $('#signupMemberTemplate').html();
+var signupMemberTemplate = Handlebars.compile(signupMemberSource);
+
+function getSignupMember(){
+    var data = [];
+    $.getJSON("/group/signupMember/" + ${groupInfo.gno}, function(arr){
+        for(var i=0; i< arr.length; i++){
+            data.push({
+        		mid : arr[i].mid,
+        	}) 
+        }
+        $("#signupMemberUL").append(signupMemberTemplate(data));
+   	});
+  }
+
+getSignupMember();
 
 </script>
 </body>

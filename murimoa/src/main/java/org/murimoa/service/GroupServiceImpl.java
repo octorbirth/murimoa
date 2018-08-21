@@ -45,4 +45,9 @@ public class GroupServiceImpl implements GroupService{
 		
 	}
 
+	@Override
+	public List<GroupDTO> getSignupMember(GroupDTO dto) {
+		return mapper.getSignupMember(dto);
+	}
+
 }

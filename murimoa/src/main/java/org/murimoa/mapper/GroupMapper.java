@@ -27,5 +27,8 @@ public interface GroupMapper {
 
 	@Insert("insert into tbl_group_signup (gno, mid) values (#{gno}, #{mid})")
 	public void signup(GroupDTO dto);
+
+	@Select("select * from tbl_group_signup where gno = #{gno}")
+	public List<GroupDTO> getSignupMember(GroupDTO dto);
     
 }

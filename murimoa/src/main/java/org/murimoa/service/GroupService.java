@@ -14,4 +14,6 @@ public interface GroupService {
 	public List<GroupDTO> getAllGroups();
 
 	public void signup(GroupDTO dto);
+
+	public List<GroupDTO> getSignupMember(GroupDTO dto);
 }

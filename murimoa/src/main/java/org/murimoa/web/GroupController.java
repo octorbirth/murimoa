@@ -5,11 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.murimoa.dto.GroupDTO;
-import org.murimoa.dto.ReplyDTO;
 import org.murimoa.service.GroupService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +56,13 @@ public class GroupController {
     @GetMapping("/manager")
     public void managerGet(Model model, GroupDTO dto) {
     	model.addAttribute("groupInfo", service.getinfo(dto));
+    }
+    
+    @GetMapping("/signupMember/{gno}")
+    public @ResponseBody List<GroupDTO> signupMember(@PathVariable("gno") Long gno) {
+		GroupDTO dto = new GroupDTO();
+		dto.setGno(gno);
+    	return service.getSignupMember(dto);
     }
 	
 }
