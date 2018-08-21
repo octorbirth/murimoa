@@ -39,4 +39,10 @@ public class GroupServiceImpl implements GroupService{
 		return mapper.getAllGroups();
 	}
 
+	@Override
+	public void signup(GroupDTO dto) {
+		mapper.signup(dto);
+		
+	}
+
 }

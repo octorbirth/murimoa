@@ -91,7 +91,7 @@
 
 <script id="allGroupsTemplate" type="text/x-handlebars-template">
     {{#each .}}
-		<div class="col-md-3 col-sm-6 col-xs-12">
+		<div data-name="{{groupName}}" data-gno="{{gno}}" class="signGroupBtn col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
 
@@ -135,7 +135,8 @@ function getAllGroups(){
           for(var i=0; i< arr.length; i++){
             data.push({
             	groupName : arr[i].name,
-            	memberCount : arr[i].memberCount
+            	memberCount : arr[i].memberCount,
+            	gno : arr[i].gno
             })  
           }
           
@@ -169,6 +170,42 @@ if (msg === 'groupRegister') {
 		  timer: 1200
 	})
 }
+
+$("#allGroupList").on("click", ".signGroupBtn", function(e){
+	e.preventDefault();
+	var gno = $(this).attr("data-gno");
+	var groupName = $(this).attr("data-name");
+	swal({
+		  title: '가입 신청하시겠습니까?',
+		  text: groupName + " is waiting for you :-)",
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#737373',
+		  confirmButtonText: 'Yes!'
+	}).then((result) => {
+		  if (result.value) {
+	        var data = {gno: gno, mid: "A100"};
+	        $.ajax({
+	            url:'/group/signup',
+	            type:'POST',
+	            contentType: "application/json; charset=utf-8",
+	            data:JSON.stringify(data),
+	            success: function(result){
+	    		    swal({
+	    			      title:'가입 신청완료!',
+	    			      text: 'Have a Good Time.',
+	    			      type: 'success',
+	    				  showConfirmButton: false,
+	    				  timer: 1200
+	    			})
+	            }
+	        })  
+		 }
+	})
+});
+
+
 </script>
 </body>
 </html>

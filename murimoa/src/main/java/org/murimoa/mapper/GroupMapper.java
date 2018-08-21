@@ -24,5 +24,8 @@ public interface GroupMapper {
 	public List<GroupDTO> getMemberList(GroupDTO dto);
 
 	public List<GroupDTO> getAllGroups();
+
+	@Insert("insert into tbl_group_signup (gno, mid) values (#{gno}, #{mid})")
+	public void signup(GroupDTO dto);
     
 }
