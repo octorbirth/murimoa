@@ -29,6 +29,7 @@
 	
 	<beans:bean id="beforeLogin" class="org.murimoa.interceptor.LoginBeforeInterceptor"></beans:bean>
     <beans:bean id="afterLogin" class="org.murimoa.interceptor.LoginAfterInterceptor"></beans:bean>
+    <beans:bean id="logout" class="org.murimoa.interceptor.LogoutInterceptor"></beans:bean>
     
     
     <interceptors>
@@ -43,6 +44,11 @@
         <interceptor>
             <mapping path="/murimoa/login"/>
             <beans:ref bean="afterLogin"/>
+        </interceptor>
+        
+        <interceptor>
+            <mapping path="/murimoa/login"/>
+            <beans:ref bean="logout"/>
         </interceptor>
     </interceptors>
 	
