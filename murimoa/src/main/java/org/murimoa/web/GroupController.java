@@ -82,5 +82,12 @@ public class GroupController {
     	return service.getGroupMember(dto);
     }
     
+    
+    @DeleteMapping("/groupMemberDelete/{gno}")
+    public @ResponseBody ResponseEntity<String> groupMemberDelete(@PathVariable("gno") Long gno, @RequestBody GroupDTO dto){
+        dto.setGno(gno);
+        service.groupMemberDelete(dto);
+        return new ResponseEntity<String>("removed",HttpStatus.OK);
+    }
 	
 }

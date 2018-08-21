@@ -34,5 +34,8 @@ public interface GroupMapper {
 
 	@Delete("delete from tbl_group_signup where gno = #{gno} and mid = #{mid}")
 	public void signupDelete(GroupDTO dto);
+
+	@Delete("delete from tbl_group_member where gno = #{gno} and mid = #{mid}")
+	public void groupMemberDelete(GroupDTO dto);
  
 }

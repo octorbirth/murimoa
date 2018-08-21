@@ -103,8 +103,8 @@
 <script type="text/javascript" src="/resources/js/handlebars.min.js"></script>
 <script id="signupMemberTemplate" type="text/x-handlebars-template">
     {{#each .}}
-		<li>
-		<div data-mid="{{mid}}" class="signup-box box-header with-border">
+		<li data-mid="{{mid}}" class="signup-box">
+		<div class="box-header with-border">
         	<div class="user-block">
             	<img class="img-circle" src="/resources/img/profile.png" alt="User Image">
                 <span class="username">{{mid}}</span>
@@ -121,13 +121,13 @@
 
 <script id="groupMemberTemplate" type="text/x-handlebars-template">
     {{#each .}}
-		<div class="box-header with-border">
+		<div data-mid="{{mid}}" class="group-member-box box-header with-border">
 			<div class="user-block">
 				<img class="img-circle" src="/resources/img/profile.png" alt="User Image">
 				<span class="username">{{mid}}</span>
 			</div> 
 			<div class="box-tools">
-				<button type="button" class="btn btn-box-tool" ><i class="fa fa-times"></i></button>
+				<button data-gno="{{gno}}" data-mid="{{mid}}" type="button" class="delete-btn btn btn-box-tool" ><i class="fa fa-times"></i></button>
 			</div>
 		</div>
     {{/each}}
@@ -178,9 +178,9 @@ function getGroupMember(){
     var data = [];
     $.getJSON("/group/getGroupMember/" + ${groupInfo.gno}, function(arr){
         for(var i=0; i< arr.length; i++){
-        	console.log(arr[i].mid);
             data.push({
         		mid : arr[i].mid,
+        		gno : arr[i].gno,
         	}) 
         }
         $("#groupMemberDIV").append(groupMemberTemplate(data));
@@ -188,6 +188,22 @@ function getGroupMember(){
   }
 
 getGroupMember();
+
+$("#groupMemberDIV").on("click", ".delete-btn", function(e){
+	e.preventDefault();
+	var gno = $(this).attr("data-gno");
+	var mid = $(this).attr("data-mid");
+	var data = {gno : gno, mid : mid}; 
+   	$.ajax({
+        url:'/group/groupMemberDelete/' + gno,
+        type: 'DELETE',
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data), 
+        success: function(result){
+        	$(".group-member-box[data-mid="+ mid +"]").remove();
+        }
+    });
+});
 
 </script>
 </body>
