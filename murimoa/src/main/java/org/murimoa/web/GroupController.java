@@ -6,8 +6,11 @@ import javax.inject.Inject;
 
 import org.murimoa.dto.GroupDTO;
 import org.murimoa.service.GroupService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +66,13 @@ public class GroupController {
 		GroupDTO dto = new GroupDTO();
 		dto.setGno(gno);
     	return service.getSignupMember(dto);
+    }
+    
+    @DeleteMapping("/signupDelete/{gno}")
+    public @ResponseBody ResponseEntity<String> signupDelete(@PathVariable("gno") Long gno, @RequestBody GroupDTO dto){
+        dto.setGno(gno);
+        service.signupDelete(dto);
+        return new ResponseEntity<String>("removed",HttpStatus.OK);
     }
 	
 }

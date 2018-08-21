@@ -101,14 +101,14 @@
 <script id="signupMemberTemplate" type="text/x-handlebars-template">
     {{#each .}}
 		<li>
-		<div class="box-header with-border">
+		<div data-mid="{{mid}}" class="signup-box box-header with-border">
         	<div class="user-block">
             	<img class="img-circle" src="/resources/img/profile.png" alt="User Image">
                 <span class="username">{{mid}}</span>
             </div>
 			<div class="box-tools">
             	<button type="button" class="btn btn-box-tool"><i class="fa fa-circle-o"></i></button>
-                <button type="button" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
+                <button data-gno="{{gno}}" data-mid="{{mid}}" type="button" class="delete-btn btn btn-box-tool"><i class="fa fa-times"></i></button>
             </div>
             
         </div>
@@ -127,6 +127,7 @@ function getSignupMember(){
         for(var i=0; i< arr.length; i++){
             data.push({
         		mid : arr[i].mid,
+        		gno : arr[i].gno,
         	}) 
         }
         $("#signupMemberUL").append(signupMemberTemplate(data));
@@ -134,6 +135,23 @@ function getSignupMember(){
   }
 
 getSignupMember();
+
+$("#signupMemberUL").on("click", ".delete-btn", function(e){
+	e.preventDefault();
+	var gno = $(this).attr("data-gno");
+	var mid = $(this).attr("data-mid");
+	var data = {gno : gno, mid : mid}; 
+	
+   	$.ajax({
+      url:'/group/signupDelete/' + gno,
+      type: 'DELETE',
+      contentType: "application/json; charset=utf-8",
+      data:JSON.stringify(data), 
+      success: function(result){
+      	$(".signup-box[data-mid="+ mid +"]").remove();
+      }
+  	});
+});
 
 </script>
 </body>

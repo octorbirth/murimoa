@@ -2,6 +2,7 @@ package org.murimoa.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.murimoa.dto.GroupDTO;
@@ -30,5 +31,8 @@ public interface GroupMapper {
 
 	@Select("select * from tbl_group_signup where gno = #{gno}")
 	public List<GroupDTO> getSignupMember(GroupDTO dto);
+
+	@Delete("delete from tbl_group_signup where gno = #{gno} and mid = #{mid}")
+	public void signupDelete(GroupDTO dto);
     
 }
