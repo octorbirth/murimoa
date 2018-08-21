@@ -22,4 +22,6 @@ public interface GroupService {
 	public List<GroupDTO> getGroupMember(GroupDTO dto);
 
 	public void groupMemberDelete(GroupDTO dto);
+
+	public void newMember(GroupDTO dto);
 }

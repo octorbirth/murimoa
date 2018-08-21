@@ -65,4 +65,10 @@ public class GroupServiceImpl implements GroupService{
 		mapper.groupMemberDelete(dto);
 	}
 
+	@Override
+	public void newMember(GroupDTO dto) {
+		mapper.signupDelete(dto);
+		mapper.newMember(dto);
+	}
+
 }

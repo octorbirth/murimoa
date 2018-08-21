@@ -42,7 +42,7 @@
 		                  <b>Since</b> <a class="pull-right"><fmt:formatDate value="${groupInfo.regdate}" pattern="yyyy-MM-dd"/></a>
 		                </li>
 		                <li class="list-group-item">
-		                  <b>Group Member</b> <a class="pull-right">${groupInfo.memberCount}</a>
+		                  <b>Group Member</b> <a id="memberCount" data-count="${groupInfo.memberCount}" class="pull-right">${groupInfo.memberCount}</a>
 		                </li>
 		              </ul>
 		
@@ -110,7 +110,7 @@
                 <span class="username">{{mid}}</span>
             </div>
 			<div class="box-tools">
-            	<button type="button" class="btn btn-box-tool"><i class="fa fa-circle-o"></i></button>
+            	<button data-gno="{{gno}}" data-mid="{{mid}}" type="button" class="allow-btn btn btn-box-tool"><i class="fa fa-circle-o"></i></button>
                 <button data-gno="{{gno}}" data-mid="{{mid}}" type="button" class="delete-btn btn btn-box-tool"><i class="fa fa-times"></i></button>
             </div>
             
@@ -201,6 +201,39 @@ $("#groupMemberDIV").on("click", ".delete-btn", function(e){
         data:JSON.stringify(data), 
         success: function(result){
         	$(".group-member-box[data-mid="+ mid +"]").remove();
+        	var memberCount = parseInt($("#memberCount").attr("data-count"));
+        	memberCount--;
+        	$("#memberCount").attr("data-count",memberCount.toString());
+        	$("#memberCount").html(memberCount.toString());
+        }
+    });
+});
+
+$("#signupMemberUL").on("click", ".allow-btn", function(e){
+	e.preventDefault();
+	var gno = $(this).attr("data-gno");
+	var mid = $(this).attr("data-mid");
+	var data = {gno : gno, mid : mid}; 
+
+	$.ajax({
+        url:'/group/newMember/' + gno,
+        type: 'PUT',
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(result){
+        	
+        	$(".signup-box[data-mid="+ mid +"]").remove();
+        	
+        	var newData = [];
+        	newData.push({
+        		mid : mid,
+        		gno : gno,
+        	}) 
+        	$("#groupMemberDIV").append(groupMemberTemplate(newData));
+        	var memberCount = parseInt($("#memberCount").attr("data-count"));
+        	memberCount++;
+        	$("#memberCount").attr("data-count",memberCount.toString());
+        	$("#memberCount").html(memberCount.toString());
         }
     });
 });

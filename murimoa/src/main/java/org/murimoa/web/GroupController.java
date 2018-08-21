@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -88,6 +89,13 @@ public class GroupController {
         dto.setGno(gno);
         service.groupMemberDelete(dto);
         return new ResponseEntity<String>("removed",HttpStatus.OK);
+    }
+    
+    @PutMapping("/newMember/{gno}")
+    public ResponseEntity<String> newMember(@PathVariable("gno") Long gno, @RequestBody GroupDTO dto){
+    	dto.setGno(gno);
+    	service.newMember(dto);
+        return new ResponseEntity<String>("update",HttpStatus.OK);
     }
 	
 }

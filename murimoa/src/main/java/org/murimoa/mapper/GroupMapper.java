@@ -37,5 +37,8 @@ public interface GroupMapper {
 
 	@Delete("delete from tbl_group_member where gno = #{gno} and mid = #{mid}")
 	public void groupMemberDelete(GroupDTO dto);
+
+	@Insert("insert into tbl_group_member (gno, mid) values (#{gno}, #{mid})")
+	public void newMember(GroupDTO dto);
  
 }
