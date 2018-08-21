@@ -1,7 +1,11 @@
 package org.murimoa.web;
 
+import org.murimoa.dto.MemberDTO;
+import org.murimoa.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.java.Log;
@@ -11,7 +15,27 @@ import lombok.extern.java.Log;
 @Log
 public class MainController {
 	
+    @Autowired
+    private MemberService service;
+	
     @GetMapping("/main")
     public void mainGet() {
+    	
+    }
+    
+    @GetMapping("/login")
+    public void loginGet() {
+    	
+    }
+    
+    @GetMapping("/signup")
+    public void signupGet() {
+        
+    }
+    
+    @PostMapping("/signup")
+    public String register(MemberDTO dto) {
+        service.register(dto);
+        return "redirect:/murimoa/login";
     }
 }

@@ -27,6 +27,25 @@
 	
 	<context:component-scan base-package="org.murimoa.web" />
 	
+	<beans:bean id="beforeLogin" class="org.murimoa.interceptor.LoginBeforeInterceptor"></beans:bean>
+    <beans:bean id="afterLogin" class="org.murimoa.interceptor.LoginAfterInterceptor"></beans:bean>
+    
+    
+    <interceptors>
+        <interceptor>
+            <mapping path="/board/*"/>
+            <mapping path="/attend/*"/>
+            <mapping path="/group/*"/>
+            <mapping path="/murimoa/main"/>
+            <beans:ref bean="beforeLogin"/>
+        </interceptor>
+        
+        <interceptor>
+            <mapping path="/murimoa/login"/>
+            <beans:ref bean="afterLogin"/>
+        </interceptor>
+    </interceptors>
+	
 	
 	
 </beans:beans>
