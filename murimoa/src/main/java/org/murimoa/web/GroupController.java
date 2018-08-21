@@ -74,5 +74,13 @@ public class GroupController {
         service.signupDelete(dto);
         return new ResponseEntity<String>("removed",HttpStatus.OK);
     }
+    
+    @GetMapping("/getGroupMember/{gno}")
+    public @ResponseBody List<GroupDTO> getGroupMember(@PathVariable("gno") Long gno) {
+		GroupDTO dto = new GroupDTO();
+		dto.setGno(gno);
+    	return service.getGroupMember(dto);
+    }
+    
 	
 }

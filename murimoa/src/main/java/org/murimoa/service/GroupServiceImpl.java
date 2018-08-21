@@ -55,4 +55,9 @@ public class GroupServiceImpl implements GroupService{
 		mapper.signupDelete(dto);
 	}
 
+	@Override
+	public List<GroupDTO> getGroupMember(GroupDTO dto) {
+		return mapper.getMemberList(dto);
+	}
+
 }

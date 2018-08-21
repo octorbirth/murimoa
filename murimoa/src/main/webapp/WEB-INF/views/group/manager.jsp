@@ -75,11 +75,14 @@
 	        	<div class="box box-primary">
 		        	<div class="box-header with-border">
               			<h3 class="box-title">그룹원 <small>Group Member</small></h3>
-            		</div>           
+            		</div> 
+					<div id="groupMemberDIV">
+					
+					</div>
           		</div>
-	        </div>
-	        <!-- /.col -->
-     	</div>
+     		</div>
+ 			<!-- /.col -->
+    	</div>
     	<!-- /.row -->
    	</section>
 
@@ -115,6 +118,21 @@
 		</li>
     {{/each}}
 </script>
+
+<script id="groupMemberTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+		<div class="box-header with-border">
+			<div class="user-block">
+				<img class="img-circle" src="/resources/img/profile.png" alt="User Image">
+				<span class="username">{{mid}}</span>
+			</div> 
+			<div class="box-tools">
+				<button type="button" class="btn btn-box-tool" ><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+    {{/each}}
+</script>
+
 <script>
 
 
@@ -152,6 +170,24 @@ $("#signupMemberUL").on("click", ".delete-btn", function(e){
       }
   	});
 });
+
+
+var groupMemberSource = $('#groupMemberTemplate').html();
+var groupMemberTemplate = Handlebars.compile(groupMemberSource);
+function getGroupMember(){
+    var data = [];
+    $.getJSON("/group/getGroupMember/" + ${groupInfo.gno}, function(arr){
+        for(var i=0; i< arr.length; i++){
+        	console.log(arr[i].mid);
+            data.push({
+        		mid : arr[i].mid,
+        	}) 
+        }
+        $("#groupMemberDIV").append(groupMemberTemplate(data));
+   	});
+  }
+
+getGroupMember();
 
 </script>
 </body>
