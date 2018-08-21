@@ -26,11 +26,9 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="charts/chartjs.html"><i class="fa fa-circle-o"></i> 그룹1</a></li>
-            <li><a href="charts/morris.html"><i class="fa fa-circle-o"></i> 그룹2</a></li>
-            <li><a href="charts/flot.html"><i class="fa fa-circle-o"></i> 그룹3</a></li>
-            <li><a href="charts/inline.html"><i class="fa fa-circle-o"></i> 그룹4</a></li>
+          <ul class="treeview-menu aside-mygroups-ul">
+            
+
           </ul>
         </li>
         
@@ -42,6 +40,23 @@
     </section>
   </aside>
   
-  <script>
+<script src="/resources/js/jquery.js"></script>  
+<script>
+function asideMyGroups(){
+	var str = "";
+	var mid = '${memberDTO.mid}';
+	$.getJSON("/group/mygroup/" + mid, function(arr){
+	    
+		for(var i=0; i< arr.length; i++){
+	    	str += '<li><a href="/board/list?gno='+arr[i].gno+'"><i class="fa fa-circle-o"></i> '+ arr[i].name +'</a></li>'
+	    }
+		
+	    $(".aside-mygroups-ul").html(str);
+	});
+	
+	
+}
+
+asideMyGroups();
   
-  </script>
+</script>

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.murimoa.dto.GroupDTO;
+import org.murimoa.dto.MemberDTO;
 import org.murimoa.service.GroupService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,9 +43,11 @@ public class GroupController {
         return "redirect:/murimoa/main";
     }
     
-	@GetMapping("/mygroup")
-    public @ResponseBody List<GroupDTO> list(){
-		return service.getMyGroup();
+	@GetMapping("/mygroup/{mid}")
+    public @ResponseBody List<GroupDTO> list(@PathVariable("mid") String mid){
+		GroupDTO dto = new GroupDTO();
+		dto.setMid(mid);
+		return service.getMyGroup(dto);
     }
 	
 	@GetMapping("/allgroups")

@@ -7,7 +7,7 @@ import org.murimoa.dto.GroupDTO;
 public interface GroupService {
 	public void register(GroupDTO dto);
 
-	public List<GroupDTO> getMyGroup();
+	public List<GroupDTO> getMyGroup(GroupDTO dto);
 
 	public GroupDTO getinfo(GroupDTO dto);
 

@@ -12,8 +12,8 @@ public interface GroupMapper {
     @Insert("insert into tbl_group (name) values (#{name})")
     public void insert(GroupDTO dto);
     
-    @Select("select * from tbl_group")
-    public List<GroupDTO> getMyGroup();
+    
+    public List<GroupDTO> getMyGroup(GroupDTO dto);
     
     @Select("select * from tbl_group where gno = #{gno}")
     public GroupDTO getGroupInfo(GroupDTO dto);
