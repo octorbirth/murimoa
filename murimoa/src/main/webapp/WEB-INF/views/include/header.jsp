@@ -4,7 +4,7 @@
   
   <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="/murimoa/main" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">M.M.</span>
       <!-- logo for regular state and mobile devices -->
@@ -22,25 +22,25 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="#" class="user-image userImage" alt="User Image">
-              <span class="hidden-xs userName">유저이름</span>
+              <img src="/upload/thumb/${memberDTO.image}" class="user-image userImage" alt="User Image">
+              <span class="hidden-xs userName">${memberDTO.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="" class="img-circle userImage" alt="User Image">
+                <img src="/upload/thumb/${memberDTO.image}" class="img-circle userImage" alt="User Image">
 
                 <p>
-				  <span class="userName">유저이름</span> (유저 아이디)
+				  <span class="userName">${memberDTO.name}</span> (${memberDTO.mid})
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="/member/profile" class="btn btn-default btn-flat">Profile</a>
+                  <a href="/murimoa/profile" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/login" class="btn btn-default btn-flat">Logout</a>
+                  <a href="/murimoa/login" class="btn btn-default btn-flat">Logout</a>
                 </div>
               </li>
             </ul>
