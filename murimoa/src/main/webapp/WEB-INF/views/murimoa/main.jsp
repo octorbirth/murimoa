@@ -81,7 +81,7 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <h5>{{groupName}}</h5>
-              <p>현승우 <label><small>(Leader)</small></label></p>
+              <p>{{leader}} <label><small>(Leader)</small></label></p>
             </div>
             <a data-gno="{{gno}}" href="#" class="group-board small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -97,7 +97,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">{{groupName}}</span>
-              <span class="info-box-text">그룹리더</span>
+              <span class="info-box-text">{{leader}}</span>
 			  <span class="info-box-number">{{memberCount}} </span>
             </div>
           </div>
@@ -112,11 +112,12 @@ var myGroupTemplate = Handlebars.compile(myGroupSource);
 function getMyGroup(){
     var data = [];
     
-    $.getJSON("/group/mygroup/", function(arr){
+    $.getJSON("/group/mygroup/${memberDTO.mid}", function(arr){
           for(var i=0; i< arr.length; i++){
             data.push({
             	groupName : arr[i].name,
             	gno : arr[i].gno,
+            	leader : arr[i].leader,
             })  
           }
           
@@ -136,7 +137,8 @@ function getAllGroups(){
             data.push({
             	groupName : arr[i].name,
             	memberCount : arr[i].memberCount,
-            	gno : arr[i].gno
+            	gno : arr[i].gno,
+            	leader : arr[i].mid
             })  
           }
           

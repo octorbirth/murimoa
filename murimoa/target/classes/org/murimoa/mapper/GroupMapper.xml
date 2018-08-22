@@ -5,14 +5,23 @@
   
 <mapper namespace="org.murimoa.mapper.GroupMapper">
     <select id="getAllGroups" resultType="GroupDTO">
-    	select t1.gno, t1.name, t2.memberCount from tbl_group t1,
- 			(select gno, count(*) memberCount from tbl_group_member group by gno) t2 where t1.gno = t2.gno
+		select * from tbl_group_member t3,
+		(
+			select t1.gno, t1.name, t2.memberCount from tbl_group t1,
+			(
+				select gno, count(*) memberCount from tbl_group_member group by gno
+			) t2 where t1.gno = t2.gno
+		) t4 where t3.gno = t4.gno and grade = 'L'
     </select>
     
     <select id="getMyGroup" resultType="GroupDTO">
-		select * from tbl_group t1,
-		(select * from tbl_group_member where mid = #{mid}) t2
-		where t1.gno = t2.gno
+		select t3.gno, t3.mid leader, t4.name from tbl_group_member t3,
+		(
+			select t1.gno, t1.name, t1.regdate, t2.mid from tbl_group t1,
+			(
+				select * from tbl_group_member where mid = #{mid}
+			) t2 where t1.gno = t2.gno
+		) t4 where t3.gno = t4.gno and grade = 'L'
     </select>
         
 </mapper>
