@@ -187,7 +187,7 @@ $("#allGroupList").on("click", ".signGroupBtn", function(e){
 		  confirmButtonText: 'Yes!'
 	}).then((result) => {
 		  if (result.value) {
-	        var data = {gno: gno, mid: "A100"};
+	        var data = {gno: gno, mid: "${memberDTO.mid}"};
 	        $.ajax({
 	            url:'/group/signup',
 	            type:'POST',

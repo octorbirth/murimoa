@@ -23,5 +23,19 @@
 			) t2 where t1.gno = t2.gno
 		) t4 where t3.gno = t4.gno and grade = 'L'
     </select>
-        
+    
+    <select id="getSignupMember" resultType="GroupDTO">
+    select * from tbl_member t1,
+	(
+		select * from tbl_group_signup where gno = #{gno}
+	) t2 where t1.mid = t2.mid
+    </select>    
+    
+    <select id="getMemberList" resultType="GroupDTO">
+    select * from tbl_member t1,
+	(
+		select * from tbl_group_member where gno = #{gno}
+	) t2 where t1.mid = t2.mid;
+    </select>   
+    
 </mapper>

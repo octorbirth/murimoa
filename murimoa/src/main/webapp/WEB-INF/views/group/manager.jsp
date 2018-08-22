@@ -35,7 +35,7 @@
 	          	<div class="box box-primary">
 		            <div class="box-body box-profile">
 		              <h3 class="profile-username text-center">${groupInfo.name}</h3>
-		              <p class="text-muted text-center">그룹리더</p>
+		              <p class="text-muted text-center">${groupInfo.leader}</p>
 		
 		              <ul class="list-group list-group-unbordered">
 		                <li class="list-group-item">
@@ -106,11 +106,11 @@
 		<li data-mid="{{mid}}" class="signup-box">
 		<div class="box-header with-border">
         	<div class="user-block">
-            	<img class="img-circle" src="/resources/img/profile.png" alt="User Image">
+            	<img class="img-circle" src="/upload/thumb/{{image}}" alt="User Image">
                 <span class="username">{{mid}}</span>
             </div>
 			<div class="box-tools">
-            	<button data-gno="{{gno}}" data-mid="{{mid}}" type="button" class="allow-btn btn btn-box-tool"><i class="fa fa-circle-o"></i></button>
+            	<button data-image="{{image}}" data-gno="{{gno}}" data-mid="{{mid}}" type="button" class="allow-btn btn btn-box-tool"><i class="fa fa-circle-o"></i></button>
                 <button data-gno="{{gno}}" data-mid="{{mid}}" type="button" class="delete-btn btn btn-box-tool"><i class="fa fa-times"></i></button>
             </div>
             
@@ -123,7 +123,7 @@
     {{#each .}}
 		<div data-mid="{{mid}}" class="group-member-box box-header with-border">
 			<div class="user-block">
-				<img class="img-circle" src="/resources/img/profile.png" alt="User Image">
+				<img class="img-circle" src="/upload/thumb/{{image}}" alt="User Image">
 				<span class="username">{{mid}}</span>
 			</div> 
 			<div class="box-tools">
@@ -146,6 +146,8 @@ function getSignupMember(){
             data.push({
         		mid : arr[i].mid,
         		gno : arr[i].gno,
+        		image : arr[i].image
+        		
         	}) 
         }
         $("#signupMemberUL").append(signupMemberTemplate(data));
@@ -181,6 +183,7 @@ function getGroupMember(){
             data.push({
         		mid : arr[i].mid,
         		gno : arr[i].gno,
+        		image : arr[i].image,
         	}) 
         }
         $("#groupMemberDIV").append(groupMemberTemplate(data));
@@ -213,6 +216,7 @@ $("#signupMemberUL").on("click", ".allow-btn", function(e){
 	e.preventDefault();
 	var gno = $(this).attr("data-gno");
 	var mid = $(this).attr("data-mid");
+	var image = $(this).attr("data-image");
 	var data = {gno : gno, mid : mid}; 
 
 	$.ajax({
@@ -228,6 +232,7 @@ $("#signupMemberUL").on("click", ".allow-btn", function(e){
         	newData.push({
         		mid : mid,
         		gno : gno,
+        		image : image
         	}) 
         	$("#groupMemberDIV").append(groupMemberTemplate(newData));
         	var memberCount = parseInt($("#memberCount").attr("data-count"));

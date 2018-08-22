@@ -21,7 +21,7 @@ public interface GroupMapper {
     @Select("select count(*) memberCount from tbl_group_member where gno = #{gno}")
     public Integer getGroupMemberCount(GroupDTO dto);
 
-    @Select("select * from tbl_group_member where gno = #{gno}")
+    
 	public List<GroupDTO> getMemberList(GroupDTO dto);
 
 	public List<GroupDTO> getAllGroups();
@@ -29,7 +29,7 @@ public interface GroupMapper {
 	@Insert("insert into tbl_group_signup (gno, mid) values (#{gno}, #{mid})")
 	public void signup(GroupDTO dto);
 
-	@Select("select * from tbl_group_signup where gno = #{gno}")
+	
 	public List<GroupDTO> getSignupMember(GroupDTO dto);
 
 	@Delete("delete from tbl_group_signup where gno = #{gno} and mid = #{mid}")

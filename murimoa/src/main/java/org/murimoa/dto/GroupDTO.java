@@ -11,5 +11,6 @@ public class GroupDTO {
     private Date regdate;
     private String leader;
     private Integer memberCount;
+    private String image;
     private String mid;
 }
