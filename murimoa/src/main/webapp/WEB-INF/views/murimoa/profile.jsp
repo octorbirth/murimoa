@@ -149,6 +149,26 @@ $("#inputPrfileImage").change(function(e){
     });
 });
 
+// 기본이미지로 복원 (DB / Session / 화면)
+$('#basicProfileImageBtn').click(function (e) {
+    e.preventDefault();
+    var basicProfileName = "profile.png";
+    var data = {image: basicProfileName, mid: '${memberDTO.mid}'};  
+    $.ajax({
+        url: '/member/restoreImage',
+        type: 'PUT',
+        contentType: "application/json; charset=utf-8",
+        data:JSON.stringify(data),
+        success: function(result){
+        	$("#userImage").replaceWith('<img id="userImage" class="profile-user-img img-responsive img-circle" src="/upload/thumb/'+basicProfileName+'" alt="User">');
+            
+            $(".targetImage").each(function(){
+                $(this).attr("src", "/upload/thumb/" + basicProfileName);
+            });
+        }
+    });
+});
+
 
 
 

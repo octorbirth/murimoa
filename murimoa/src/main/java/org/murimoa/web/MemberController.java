@@ -66,4 +66,17 @@ public class MemberController {
         
         return map;        
     }
+    
+    @PutMapping("/restoreImage")
+    public ResponseEntity<String> restoreImage(@RequestBody MemberDTO dto, HttpServletRequest request){
+        
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("memberDTO") != null) {
+            MemberVO vo = service.updateImage(dto);
+            session.setAttribute("memberDTO", vo);            
+        }
+        
+        return new ResponseEntity<String>("update",HttpStatus.OK);
+    }
 }
