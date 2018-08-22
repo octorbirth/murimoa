@@ -22,7 +22,7 @@ public interface AttendMapper {
     @Select("select * from tbl_lecture where gno = #{gno}")
 	public List<AttendDTO> getAttendList(GroupDTO dto);
 
-    @Select("select * from tbl_attend where lno = #{lno}")
+
 	public List<AttendDTO> getAttendMemberList(AttendDTO dto);
 
     @Delete("delete from tbl_attend where lno = #{lno}")

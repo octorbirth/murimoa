@@ -13,4 +13,5 @@ public class AttendDTO {
     private String mid;
     private String attend;
 	private Date regdate;
+	private String name;
 }

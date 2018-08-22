@@ -37,13 +37,13 @@
             <table class="table table-hover">
               <tr>
               	<th>#</th>
-                <th>아이디</th>
+                <th>이름 (아이디)</th>
                 <th>출석여부</th>
               </tr>
               <c:forEach var="item" items="${attendMemberList}" varStatus="status">
               <tr>
               	<td>${status.count}</td>
-              	<td>${item.mid}</td>
+              	<td><b>${item.name}</b>　(${item.mid})</td>
               	<td><label class='switch'>
               		<c:if test="${item.attend == 'Y' }">
 						<input name='attendMemberList' value='${item.mid}' type='checkbox' checked>		
@@ -62,8 +62,10 @@
           <!-- /.box-body -->
                   
         <div class="box-footer">
+        <c:if test="${memberDTO.mid == groupInfo.leader}">
           <button id="deleteBtn" class="btn btn-default">삭제</button>
           <button id="modifyBtn" class="btn btn-default">수정</button>
+		</c:if>
           <button id="cancelBtn" class="btn pull-right">이전</button>
         </div>
         

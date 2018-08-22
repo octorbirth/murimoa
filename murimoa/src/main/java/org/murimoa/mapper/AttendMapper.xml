@@ -8,4 +8,11 @@
 		select t1.attend, t1.lno from tbl_attend t1,
 			(select lno from tbl_lecture where gno = #{gno}) t2 where t1.mid=#{mid} and t1.lno = t2.lno
     </select>    
+    
+    <select id="getAttendMemberList" resultType="AttendDTO">
+		select * from tbl_member t1,
+		(
+			select * from tbl_attend where lno = #{lno}
+		) t2 where t1.mid = t2.mid
+    </select> 
 </mapper>

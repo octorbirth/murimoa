@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.murimoa.dto.AttendDTO;
 import org.murimoa.dto.GroupDTO;
 import org.murimoa.service.AttendService;
+import org.murimoa.service.GroupService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,9 @@ public class AttendController {
 
 	@Inject
 	private AttendService attendService;
+	
+	@Inject
+	private GroupService groupService;
 	
     @GetMapping("/register")
     public void registerGet(Model model, @ModelAttribute("groupInfo") GroupDTO dto) {
@@ -60,6 +64,10 @@ public class AttendController {
 	@GetMapping("/view")
 	public void view(@ModelAttribute("AttendInfo") AttendDTO dto, Model model) {
 		model.addAttribute("attendMemberList", attendService.getAttendMemberList(dto));
+		
+		GroupDTO groupVO = new GroupDTO();
+		groupVO.setGno(dto.getGno());
+		model.addAttribute("groupInfo", groupService.getinfo(groupVO));
 		return;
 	}
 	
