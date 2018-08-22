@@ -45,4 +45,9 @@ public class MainController {
     public void loginPost(MemberDTO dto, Model model) {
         model.addAttribute("memberDTO", service.login(dto));
     }
+    
+    @GetMapping("/profile")
+    public void profileGet() {
+    	
+    }
 }

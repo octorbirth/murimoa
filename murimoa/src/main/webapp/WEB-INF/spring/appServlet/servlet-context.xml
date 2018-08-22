@@ -38,6 +38,7 @@
             <mapping path="/attend/*"/>
             <mapping path="/group/*"/>
             <mapping path="/murimoa/main"/>
+            <mapping path="/murimoa/profile"/>
             <beans:ref bean="beforeLogin"/>
         </interceptor>
         
