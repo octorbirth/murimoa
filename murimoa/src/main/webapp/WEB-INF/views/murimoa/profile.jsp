@@ -57,7 +57,7 @@
                             
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Name</b> <a class="pull-right">${memberDTO.name}</a>
+                                    <b>Name</b> <a class="pull-right"><span class="userName">${memberDTO.name}</span></a>
                                 </li>
                             </ul>
                         </div>
