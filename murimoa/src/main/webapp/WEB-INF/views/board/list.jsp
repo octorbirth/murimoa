@@ -34,7 +34,7 @@
 	          	<div class="box box-primary">
 		            <div class="box-body box-profile">
 		              <h3 class="profile-username text-center">${groupInfo.name}</h3>
-		              <p class="text-muted text-center">그룹리더</p>
+		              <p class="text-muted text-center">${groupInfo.leader}</p>
 		
 		              <ul class="list-group list-group-unbordered">
 		                <li class="list-group-item">
@@ -44,8 +44,9 @@
 		                  <b>Group Member</b> <a class="pull-right">${groupInfo.memberCount}</a>
 		                </li>
 		              </ul>
-		
+		            <c:if test="${memberDTO.mid == groupInfo.leader}">
 		              <a href="/group/manager?gno=${groupInfo.gno}" class="btn btn-primary btn-block"><b>그룹관리</b></a>
+		            </c:if>
 		            </div>
 	            <!-- /.box-body -->
 	          	</div>
@@ -130,13 +131,13 @@
 			              </c:forEach>
 			            </table>
 			        </div>
-			        
+			        <c:if test="${memberDTO.mid == groupInfo.leader}">
 	                <div class="box-footer clearfix">
-	
 			          <button id="attendRegistBtn" type="button" class="btn btn-default pull-right">
 			          		<i class="fa fa-plus"></i> 출석
 			          </button>
 			        </div>
+			        </c:if> 
 	              </div>
 	              <!-- /.tab-pane -->
 	            </div>

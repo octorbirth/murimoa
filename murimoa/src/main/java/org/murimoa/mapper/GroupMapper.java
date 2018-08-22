@@ -43,5 +43,8 @@ public interface GroupMapper {
 
 	@Insert("insert into tbl_group_member (gno, mid, grade) values (LAST_INSERT_ID(), #{mid}, 'L')")
 	public void firstMember(GroupDTO dto);
+
+	@Select("select mid from tbl_group_member where grade = 'L' and gno = #{gno}")
+	public String getGroupLeader(GroupDTO dto);
  
 }

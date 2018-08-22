@@ -33,6 +33,7 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public GroupDTO getinfo(GroupDTO dto) {
 		GroupDTO info = mapper.getGroupInfo(dto);
+		info.setLeader(mapper.getGroupLeader(dto));
 		info.setMemberCount(mapper.getGroupMemberCount(dto));
 		return info;
 	}
