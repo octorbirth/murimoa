@@ -49,7 +49,7 @@
                             	<i id="modifyNameBtn" style="margin-left:6px;" class="fa fa-pencil-square-o"></i>
                             </h3>
 							<p class="text-muted text-center">
-                                <span id="modifyProfileImageBtn">프로필 수정</span>  
+                                <span id="modifyProfileImageBtn">이미지 수정</span>  
                                 	∥  <span id="basicProfileImageBtn">기본 이미지</span>
 							</p>
 							
@@ -117,6 +117,37 @@ $('#modifyNameBtn').click(function (e) {
 	})
 });
     
+
+// 파일선택 <input> 동작시키기
+$('#modifyProfileImageBtn').click(function (e) {
+    e.preventDefault();
+    $('#inputPrfileImage').click();
+});
+
+// 선택한 파일로 이미지변경 (DB / Session / 화면)
+$("#inputPrfileImage").change(function(e){
+    e.preventDefault();
+    
+    var formData = new FormData();
+    formData.append("file", $("#inputPrfileImage")[0].files[0]);
+    formData.append("mid", '${memberDTO.mid}');
+    $.ajax({
+        url: '/member/updateImage',
+        data: formData,
+        dataType:'json',
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function(data){
+            $("#inputPrfileImage").val("");
+            $("#userImage").replaceWith('<img id="userImage" class="profile-user-img img-responsive img-circle" src="/upload/thumb/'+data.uploadName+'" alt="'+data.original+'">');
+            
+            $(".targetImage").each(function(){
+                $(this).attr("src", "/upload/thumb/" +data.uploadName);
+            });
+        }
+    });
+});
 
 
 

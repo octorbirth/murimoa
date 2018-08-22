@@ -6,7 +6,7 @@
     <section class="sidebar">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/upload/thumb/${memberDTO.image}" class="img-circle userImage" alt="User Image">
+          <img src="/upload/thumb/${memberDTO.image}" class="img-circle userImage targetImage" alt="User Image">
         </div>
         <div class="pull-left info">
           <p class="userName">${memberDTO.name}</p>

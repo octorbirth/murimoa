@@ -11,4 +11,6 @@ public interface MemberService {
 	public MemberVO autoLogin(MemberDTO dto);
 	
     public MemberVO updateName(MemberDTO dto);
+    
+    public MemberVO updateImage(MemberDTO dto);
 }

@@ -22,4 +22,7 @@ public interface MemberMapper {
     
     @Select("select * from tbl_member where mid = #{mid}")
     public MemberVO updatedUser(MemberDTO dto);
+    
+    @Update("update tbl_member set image=#{image} where mid= #{mid}")
+    public void updateImage(MemberDTO dto);
 }

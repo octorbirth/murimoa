@@ -22,13 +22,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/upload/thumb/${memberDTO.image}" class="user-image userImage" alt="User Image">
+              <img src="/upload/thumb/${memberDTO.image}" class="user-image userImage targetImage" alt="User Image">
               <span class="hidden-xs userName">${memberDTO.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/upload/thumb/${memberDTO.image}" class="img-circle userImage" alt="User Image">
+                <img src="/upload/thumb/${memberDTO.image}" class="img-circle userImage targetImage" alt="User Image">
 
                 <p>
 				  <span class="userName">${memberDTO.name}</span> (${memberDTO.mid})

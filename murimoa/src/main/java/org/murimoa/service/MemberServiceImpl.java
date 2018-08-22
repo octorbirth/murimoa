@@ -38,5 +38,12 @@ public class MemberServiceImpl implements MemberService{
         mapper.updateName(dto);
         return mapper.updatedUser(dto);
     }
+    
+    @Transactional
+    @Override
+    public MemberVO updateImage(MemberDTO dto) {
+        mapper.updateImage(dto);
+        return mapper.updatedUser(dto);
+    }
 	
 }
