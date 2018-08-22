@@ -40,5 +40,8 @@ public interface GroupMapper {
 
 	@Insert("insert into tbl_group_member (gno, mid) values (#{gno}, #{mid})")
 	public void newMember(GroupDTO dto);
+
+	@Insert("insert into tbl_group_member (gno, mid, grade) values (LAST_INSERT_ID(), #{mid}, 'L')")
+	public void firstMember(GroupDTO dto);
  
 }

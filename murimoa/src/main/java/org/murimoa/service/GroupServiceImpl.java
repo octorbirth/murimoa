@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.murimoa.dto.GroupDTO;
 import org.murimoa.mapper.GroupMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.java.Log;
 
@@ -17,9 +18,11 @@ public class GroupServiceImpl implements GroupService{
     @Inject
     private GroupMapper mapper;
     
+    @Transactional
 	@Override
 	public void register(GroupDTO dto) {
 		 mapper.insert(dto);
+		 mapper.firstMember(dto);
 	}
 
 	@Override

@@ -82,6 +82,10 @@ $("#createGroup").on("click",function(e){
         return;
     }
     
+    var leader= '${memberDTO.mid}';
+    mainForm.append("<input type='hidden' name='mid' value='"+leader+"'>");
+    mainForm.submit();
+    
     mainForm.submit();
 });
 </script>
