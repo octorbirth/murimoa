@@ -113,7 +113,7 @@
             return;
         }
         
-        var writer= 'h';
+        var writer= '${memberDTO.mid}';
         mainForm.append("<input type='hidden' name='writer' value='"+writer+"'>");
         mainForm.append("<input type='hidden' name='gno' value='" + ${groupInfo.gno} + "'>");
         
