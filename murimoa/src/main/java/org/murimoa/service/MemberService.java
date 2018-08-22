@@ -9,4 +9,6 @@ public interface MemberService {
 	public MemberVO login(MemberDTO dto);
 	
 	public MemberVO autoLogin(MemberDTO dto);
+	
+    public MemberVO updateName(MemberDTO dto);
 }

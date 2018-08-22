@@ -6,6 +6,7 @@ import org.murimoa.dto.MemberDTO;
 import org.murimoa.mapper.MemberMapper;
 import org.murimoa.vo.MemberVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.java.Log;
 
@@ -29,6 +30,13 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public MemberVO autoLogin(MemberDTO dto) {
         return mapper.autoLogin(dto);
+    }
+    
+    @Transactional
+    @Override
+    public MemberVO updateName(MemberDTO dto) {
+        mapper.updateName(dto);
+        return mapper.updatedUser(dto);
     }
 	
 }

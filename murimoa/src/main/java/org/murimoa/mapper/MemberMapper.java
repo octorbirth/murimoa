@@ -2,6 +2,7 @@ package org.murimoa.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.murimoa.dto.MemberDTO;
 import org.murimoa.vo.MemberVO;
 
@@ -15,4 +16,10 @@ public interface MemberMapper {
     
     @Select("select * from tbl_member where mid = #{mid}")
     public MemberVO autoLogin(MemberDTO dto);
+    
+    @Update("update tbl_member set name=#{name} where mid= #{mid}")
+    public void updateName(MemberDTO dto);
+    
+    @Select("select * from tbl_member where mid = #{mid}")
+    public MemberVO updatedUser(MemberDTO dto);
 }

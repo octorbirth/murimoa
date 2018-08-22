@@ -45,7 +45,7 @@
                         <div class="box-body box-profile">
                             <img id="userImage" class="profile-user-img img-responsive img-circle" src="/upload/thumb/${memberDTO.image}" alt="User">
 
-                            <h3 class="profile-username text-center"><span id="userName">${memberDTO.name}</span>
+                            <h3 class="profile-username text-center"><span class="userName">${memberDTO.name}</span>
                             	<i id="modifyNameBtn" style="margin-left:6px;" class="fa fa-pencil-square-o"></i>
                             </h3>
 							<p class="text-muted text-center">
@@ -86,6 +86,36 @@
 
 <script type="text/javascript">
 
+$('#modifyNameBtn').click(function (e) {
+    e.preventDefault();
+    swal({
+          title: '너의 이름은?',
+          input: 'text',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Ok',
+          showLoaderOnConfirm: true,
+        }).then((result) => {
+          if (result.value) {
+
+            var data = {name: result.value, mid: '${memberDTO.mid}'};  
+
+            $.ajax({
+                url: '/member/updateName',
+                type: 'PUT',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function( r ){
+                    $(".userName").each(function(){
+                        $(this).text(result.value)
+                    });
+                }
+			});
+		}
+	})
+});
     
 
 
