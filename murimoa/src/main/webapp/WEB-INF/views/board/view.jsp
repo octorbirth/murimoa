@@ -56,8 +56,10 @@
             <div class="pull-right">
               <button id="cancelBtn" type="button" class="btn btn-default"><i class="fa fa-reply"></i> 뒤로</button>
             </div> 
+            <c:if test="${memberDTO.mid == boardInfo.writer}">
             <button id="deleteBtn" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
             <button id="modifyBtn" type="button" class="btn btn-default"><i class="fa fa-pencil"></i> 수정</button>
+            </c:if>
           </div>
           
           <div class="box-footer">
@@ -106,15 +108,17 @@
     {{#each .}}
     <div data-rno={{rno}} class="reply-box post clearfix">
         <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="/resources/img/basic_profile.png" alt="User Image">
+            <img class="img-circle img-bordered-sm" src="/upload/thumb/{{image}}" alt="User Image">
             <span class="username">{{replyer}}</span>
             <span class="description"><i class="fa fa-clock-o margin-r-4"></i> {{replyDate}}</span>
         </div>
         <p data-rno={{rno}} class="reply-contents">{{reply}}</p>
+        {{#if userRole}}
         <ul class="list-inline">
             <li data-rno={{rno}} class="delReply"><a href="#" class="link-black text-sm"><i class="fa fa-trash margin-r-5"></i> 삭제</a></li>
             <li data-rno={{rno}} class="modReply"><a href="#" class="link-black text-sm"><i class="fa fa-pencil margin-r-5"></i> 수정</a></li>
         </ul>
+        {{/if}}    
               
         <div data-rno="{{rno}}" style="display:none;" class="modifyReply-inputBox input-group">
             <textarea data-rno="{{rno}}" type="text"  style="resize:none;" class="modifyReply-textarea form-control" placeholder="Enter contents"></textarea>
@@ -190,12 +194,20 @@
         $.getJSON("/reply/list/" + ${boardInfo.bno}, function(arr){
               for(var i=0; i< arr.length; i++){
                 var time = new Date(arr[i].regdate);
-                var replyDate = (time.getFullYear()+"-"+(time.getMonth()+1)+"-"+ time.getDate());  
+                var replyDate = (time.getFullYear()+"-"+(time.getMonth()+1)+"-"+ time.getDate()); 
+                
+                var userRole = false;
+                if( arr[i].replyer === '${memberDTO.mid}'){
+                    userRole = true;
+                }
+                
                 data.push({
                     replyer : arr[i].replyer,
                     replyDate : replyDate,
                     reply : arr[i].reply,
-                    rno: arr[i].rno
+                    rno: arr[i].rno,
+                    image : arr[i].image,
+                    userRole : userRole
                 })  
               }
               
@@ -207,7 +219,7 @@
     
     $("#replyBtn").click(function(e){
         e.preventDefault();
-        var data = {reply:$("#reply").val(), replyer: "Temp", bno: ${boardInfo.bno}};
+        var data = {reply:$("#reply").val(), replyer: '${memberDTO.mid}', bno: ${boardInfo.bno}};
         $.ajax({
             url:'/reply/new',
             type:'POST',

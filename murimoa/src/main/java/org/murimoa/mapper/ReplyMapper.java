@@ -12,7 +12,7 @@ public interface ReplyMapper {
     @Insert ("insert into tbl_reply (reply, replyer, bno) values (#{reply}, #{replyer}, #{bno})" )
     public void insert(ReplyDTO dto);
     
-    @Select("select * from tbl_reply where bno = #{bno} order by regdate desc")
+
     public List<ReplyDTO> listReply(ReplyDTO dto);
     
     @Delete("delete from tbl_reply where rno = #{rno}")

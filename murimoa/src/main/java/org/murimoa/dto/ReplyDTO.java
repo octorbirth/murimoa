@@ -8,5 +8,6 @@ import lombok.Data;
 public class ReplyDTO {
     private Integer rno, bno;
     private String reply, replyer;
+    private String image;
     private Date regdate;
 }
