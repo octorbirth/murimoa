@@ -37,13 +37,13 @@
             <table class="table table-hover">
               <tr>
               	<th>#</th>
-                <th>아이디</th>
+                <th>이름 (아이디)</th>
                 <th>출석여부</th>
               </tr>
               <c:forEach var="item" items="${memberList}" varStatus="status">
               <tr>
               	<td>${status.count}</td>
-              	<td>${item.mid}</td>
+              	<td><b>${item.name}</b>　(${item.mid})</td>
               	<td><label class='switch'>
             		<input name='attendMemberList' value='${item.mid}' type='checkbox'>
             		<span class='slider round'></span>
